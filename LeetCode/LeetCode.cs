@@ -603,5 +603,31 @@ namespace LeetCode
                 return false;
             return true;
         }
+
+        public static void Convert2DArray1D()
+        {
+            int[,] arr = { { 1, 3, 5, 7 }, { 2, 4, 6, 8 }, { 0, 9, 10, 11 } };
+
+            int rows = arr.GetLength(0);
+            int cols = arr.GetLength(1);
+
+            int[] combinedArray = new int[rows * cols];
+            int combinedArrayPosition = 0;
+            for (int i = 0; i < rows; i++)
+            {
+                for (int j = 0; j < cols; j++)
+                {
+                    combinedArray[combinedArrayPosition] = arr[i, j];
+                    combinedArrayPosition++;
+                }
+            }
+            Array.Sort(combinedArray);
+
+            foreach (int i in combinedArray)
+            {
+                Console.WriteLine(i);
+            }
+
+        }
     }
 }
