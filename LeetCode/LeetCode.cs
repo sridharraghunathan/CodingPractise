@@ -5,14 +5,50 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace LeetCode
-{ 
+{
     //DataStructures GitHub.
-//.https://github.com/anirban-s/data-structures-and-algorithms/tree/master/4.%20DS%20-%20Stack%20and%20Queue
-    public class LeetCodeSolution
+    //.https://github.com/anirban-s/data-structures-and-algorithms/tree/master/4.%20DS%20-%20Stack%20and%20Queue
+
+
+    public class Solution
     {
-         
+        public static  int NumIslands(char[][] grid)
+        {
+            var result = 0;
+
+            for (var i = 0; i < grid.Length; i++)
+            {
+                for (var j = 0; j < grid[0].Length; j++)
+                {
+                    if (grid[i][j] != '1') continue; // Skip water and visited cells ('2')
+                    result++;
+                    MarkVisitedIsland(grid, i, j);
+                }
+            }
+
+            return result;
+        }
+
+        private static void MarkVisitedIsland(char[][] grid, int row, int col)
+        {
+            if (row < 0 || row >= grid.Length) return;
+            if (col < 0 || col >= grid[0].Length) return;
+
+            if (grid[row][col] == '0') return;
+            if (grid[row][col] == '2') return;
+
+            grid[row][col] = '2'; // Mark as visited
+
+            MarkVisitedIsland(grid, row - 1, col); // up
+            MarkVisitedIsland(grid, row + 1, col); // down
+            MarkVisitedIsland(grid, row, col - 1); // left
+            MarkVisitedIsland(grid, row, col + 1); // right
+
+
+        }
     }
- 
+
+
     public class ListNode
     {
         public int val;
@@ -63,12 +99,11 @@ namespace LeetCode
     }
     internal class LeetCodeClass
     {
-
-
-
-
         public static void FindSingularNumber(int[] numbers)
         {
+        //  Input: nums = [4, 1, 2, 1, 2]
+
+      //  Output: 4
             int i = 0;
             Dictionary<int, int> dict = new Dictionary<int, int>();
             int end = numbers.Length - 1;
@@ -87,7 +122,9 @@ namespace LeetCode
         }
         public string LongestPalindromeSubstring(string s)
         {
-            //amma //madam 
+        //amma //madam 
+     //   Input: s = "babad"
+//Output: "bab"
 
             int start = 0;
             int end = 0;
@@ -156,6 +193,7 @@ namespace LeetCode
         }
         public static int[] TwoSum()
         {
+            // Finding the pair of 2 number based on target if 9 then pair 2,7
             int[] numbers = new int[] { 2, 17, 9, 7 };
             short target = 9;
             HashSet<int> dict = new HashSet<int>();
@@ -197,7 +235,7 @@ namespace LeetCode
         }
         public static int Fibonacci(int n)
         {
-
+            // when we use recursive series always have base condition and return keyword must
             if (n == 1)
                 return 1;
 
@@ -255,6 +293,13 @@ namespace LeetCode
         }
         public  static  void printLeaders( )
         {
+/*
+        Input: arr[] = { 16, 17, 4, 3, 5, 2 },
+Output: 17, 5, 2
+
+Input: arr[] = { 1, 2, 3, 4, 5, 2 },
+Output: 5, 2
+*/
             int[] arr = new int[] { 16, 17, 4, 3, 5, 2 };
             int n = arr.Length;
 
@@ -274,6 +319,7 @@ namespace LeetCode
         }
         public static int[] MergeArray(int[, ] array, int N, int[] output)
         {
+            // Sorting the 2D array by coverting to 1D and Sorting the code.
             var col = array.GetLength(1);
             for (int i = 0; i < N; i++)
             {
@@ -287,7 +333,7 @@ namespace LeetCode
         }
         public static int[][] MakeZeroJagged(int[][] array)
         {
-
+            // If the column or row has one occurence of Zero then make entire row and column as Zero using Jagged Array
             HashSet<int> row = new HashSet<int>();
             HashSet<int> col = new HashSet<int>();
             var noOfRows = array.GetLength(0); 
@@ -327,7 +373,7 @@ namespace LeetCode
         }
         public static int[,]  MakeZero(int[,] array)  
         {
-
+            // If the column or row has one occurence of Zero then make entire row and column as Zero using MultiDimensional Array
             HashSet<int> row = new HashSet<int>();
             HashSet<int> col = new HashSet<int>();
              var noOfRows = array.GetLength(0);
@@ -367,7 +413,8 @@ namespace LeetCode
             // 2,3,5,7,11,13,17
             //Number Divisible by itself not another number
             int i, m = 0, flag = 0;
-            m = n / 2;
+            m = n / 2; // we dont need to do for all the case so we are restricting till half the number
+            // eg : 17 we need to check from 2 ,3,4,5,6,7,8,9,10,11,12,131,14,15,16 are divisible so instead we do half
             for (i = 2; i <= m; i++)
             {
                 if (n % i == 0) // number is divisible then its not prime number.
@@ -445,6 +492,9 @@ namespace LeetCode
         public static bool ContainCommonItem(string[] source, string[] target)
         {
 
+            //var temp3 = new string[] { "h1i", "hello" };
+            //var temp4 = new string[] { "hi", "how", "Are", "you" };
+            // like intersect
             Dictionary<string, bool> map = target.ToDictionary(x => x, x => true);
 
             for (int i = 0; i < source.Length; i++)
@@ -458,7 +508,7 @@ namespace LeetCode
         }
         public static int RecurringNumber(int[] nums)
         {
-
+            // IF THE ARRAY HAS DUPLICATES THEN RETURN FIRST DUPLICATE POSITION
             int i = 0;
   
             var map = new HashSet<int>();
@@ -481,24 +531,11 @@ namespace LeetCode
             return 0;
 
         }
-        public static  int[] TwoSum(int[] nums, int target)
-        {
-            Dictionary<int, int> map = new Dictionary<int, int>();
-
-            for (int i = 0; i < nums.Length; i++)
-            {
-                int complement = target - nums[i];
-                if (map.ContainsKey(complement))
-                {
-                    return new int[] { map[complement], i };
-                }
-                 
-                map[nums[i]] = i;
-            }
-            return new int[0];
-        }
+         
         public static  int MaxSubArray(int[] nums)
         {
+        //      Input: nums = [-2, 1, -3, 4, -1, 2, 1, -5, 4]
+        //Output: 6
             int max = nums[0];
             int tmp = 0;
             for (int i = 0; i < nums.Length; i++)
@@ -518,7 +555,7 @@ namespace LeetCode
         public static void MoveZeroes(int[] nums)
         {
             int lastZeroPos = 0;
-
+            // MOVE THE ZEROS TO LAST by TRAVERSE THE ARRAY
             for (int i = 0; i < nums.Length; i++)
             {
                 if (nums[i] != 0)
@@ -530,7 +567,9 @@ namespace LeetCode
         }
         public static  int LengthOfLongestSubstring(string s)
         {
-            //abccdef
+            //abcabcbb
+            // Here  we need to find the Longest string without repeating 
+            //if you find remove first occurence .
             var charSet = new HashSet<char>();
             int left = 0, right = 0, maxLength = 0;
             while (right < s.Length)
@@ -604,7 +643,6 @@ namespace LeetCode
                 return false;
             return true;
         }
-
         public static void Convert2DArray1D()
         {
             int[,] arr = { { 1, 3, 5, 7 }, { 2, 4, 6, 8 }, { 0, 9, 10, 11 } };

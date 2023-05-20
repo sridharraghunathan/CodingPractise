@@ -239,26 +239,24 @@ Array.Reverse(chars);
 Console.WriteLine(LeetCodeClass.IsArmStrongNumber(153));
 
 Console.WriteLine(LeetCodeClass.ReverseNumber(-123));
+
+
+char[][] grid1 = new char[][]
+{
+    new char[] {'1' ,'1', '1', '1', '0'    },
+    new char[] { '1', '1', '0', '0' ,'0'  },
+    new char[] { '1' ,'1', '0', '1', '1' },
+       new char[] { '0' ,'0', '0', '1', '0' }
+};
+
+char[][] grid = new char[][]
+{
+    new char[] {'1' ,'1'},
+      new char[] {'1' ,'0'   }
+};
+Console.WriteLine(Solution.NumIslands(grid));
+
 */
 
-int[,] arr = { { 1, 3, 5, 7 }, { 2, 4, 6, 8 }, { 0, 9, 10, 11 } };
 
-int rows = arr.GetLength(0);
-int cols = arr.GetLength(1);
-
-int[] combinedArray = new int[rows * cols];
-int combinedArrayPosition = 0;
-for (int i = 0; i < rows; i++)
-{
-    for (int j =0; j < cols; j++)
-    {
-        combinedArray[combinedArrayPosition] = arr[i, j];
-        combinedArrayPosition++;
-    }
-}
-Array.Sort(combinedArray);
-
-foreach( int i in combinedArray)
-{
-    Console.WriteLine(i);
-}
+LeetCodeClass.LengthOfLongestSubstring("abcabcbb");
