@@ -668,5 +668,33 @@ Output: 5, 2
             }
 
         }
+
+        public static int FindKthPositive(int[] arr, int k)
+        {
+            /* Input: arr = [2,3,4,7,11], k = 5
+Output: 9
+            Explanation: The missing positive integers are [1,5,6,8,9,10,12,13,...]. The 5th missing positive integer is 9.
+            Input: arr = [1,2,3,4], k = 2
+Output: 6
+Explanation: The missing positive integers are [5,6,7,...]. The 2nd missing positive integer is 6.
+
+             * 
+             */
+            int l = 0, h = arr.Length - 1, mid;
+            while (l <= h)
+            {
+                mid = l + (h - l) / 2;
+                if ((arr[mid] - (mid + 1)) < k)
+                {
+                    l = mid + 1;
+                }
+                else
+                {
+                    h = mid - 1;
+                }
+            }
+            return l + k;
+        }
+
     }
 }
