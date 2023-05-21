@@ -268,42 +268,46 @@ int [] arr1 = LeetCodeClass.SetMismatchLinq(arr);
 print(arr1);
 int[] arr2 = LeetCodeClass.SetMismatchLinq(arr);
 print(arr2);
- */
 
 int[] nums = new int[] { 1, 2, 3, 3, 6 };
 
-int [] arr = FindErrorNums(nums);
+int [] arr = LeetCodeClass.FindErrorNums(nums);
 print(arr);
 
-  int[] FindErrorNums(int[] nums)
+
+
+char[][] grid1 = new char[][]
 {
-    //Brute force
-    //use HashSet to find duplicate number
-    //traverse the array to find the missing number
-    var set = new HashSet<int>();
-    int duplicate = -1, missing = -1;
-    var list = new List<int>(nums);
-    for (int i = 0; i < list.Count; i++)
-    {
-        if (set.Add(list[i]) == false)
-        {
-            duplicate = nums[i];
-            break;
-        }
-    }
-    for (int i = 0; i < list.Count; i++)
-    {
-        if (list.Contains(i + 1) == false)
-        {
-            missing = i + 1;
-            break;
-        }
-    }
-    return new int[] { duplicate, missing };
-}
+    new char[] {'1' ,'1', '1', '1', '0'    },
+    new char[] { '1', '1', '0', '0' ,'0'  },
+    new char[] { '1' ,'1', '0', '1', '1' },
+       new char[] { '0' ,'0', '0', '1', '0' }
+};
 
+char[][] grid = new char[][]
+{
+    new char[] {'1' ,'1','1'},
+      new char[] {'1' ,'0','1'   },
+      new char[] {'1' ,'1'  ,'1' }
 
-void print(int[] arr)
+};
+
+int[][] grid2 = new int[][]
+{
+    new int[] {1 ,0,1},
+      new int[] {1 ,0,1   },
+      new int[] {1 ,1  ,1 }
+
+};
+Console.WriteLine(Solution.NumOfClosedIsland(grid));
+Console.WriteLine(Solution.ClosedIsland(grid2));
+Console.WriteLine(LeetCodeClass.ReverseStringRecursion("hello")); 
+  */
+Console.WriteLine(LeetCodeClass.IsPalindromeRecursion("madam"));
+
+string name = "sridhar";
+Console.WriteLine(name.Substring(1, name.Length - 1)); 
+void Print(int[] arr)
 {
     foreach( var item in arr)
     {

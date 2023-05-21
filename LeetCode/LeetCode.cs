@@ -12,6 +12,87 @@ namespace LeetCode
 
     public class Solution
     {
+
+        public static int ClosedIsland(int[][] grid)
+        {
+            var result = 0;
+
+            for (var i = 0; i < grid.Length; i++)
+            {
+                for (var j = 0; j < grid[0].Length; j++)
+                {
+                    if (grid[i][j] == 0)
+                    {
+                        if (DFS(grid, i, j))
+                        {
+                            result++;
+                        }
+                    }
+                }
+            }
+
+            return result;
+        }
+        private static bool DFS(int[][] grid, int sr, int sc)
+        {
+            if (sr < 0 || sr >= grid.Length || sc < 0 || sc >= grid[0].Length)
+            {
+                return false;
+            }
+
+            if (grid[sr][sc] == 1)
+            {
+                return true;
+            }
+
+            grid[sr][sc] = 1;
+            var result = true;
+
+            result &= DFS(grid, sr - 1, sc);
+            result &= DFS(grid, sr + 1, sc);
+            result &= DFS(grid, sr, sc - 1);
+            result &= DFS(grid, sr, sc + 1);
+
+            return result;
+        }
+        public static int NumOfClosedIsland(char[][] grid)
+        {
+            int totalClosedIsland = 0;
+
+            for ( int i =0;i < grid.Length - 1; i++)
+            {
+                for ( int j = 0; j < grid[0].Length - 1;j++)
+                {
+                    ///If the row,col value is 1 or 2 then skip either water or Visited
+                    if (grid[i][j] == '1' || grid[i][j] == '2') continue;
+                    /// if the row col is zero the apply DFS
+                    if (grid[i][j] == '0')
+                    {
+                        var status = MarkVisitedIslandByAllDirection(grid, i, j);
+                        totalClosedIsland = status ? totalClosedIsland+1 : 0 ;
+   
+                    }
+                }
+            }
+
+
+            return totalClosedIsland;
+        }
+        public static bool MarkVisitedIslandByAllDirection(char [] [] grid,int row ,int col)
+        { 
+            // Edge cases not to apply DFS
+            if (row < 0 || col >= grid.Length || row >= grid.Length || col >= grid[0].Length ) return false;
+            if (grid[row][col] == '1' || grid[row][col] == '2') return true ;
+             grid[row][col] = '2'; // Marking as visited
+            var result = true;
+
+            result &= MarkVisitedIslandByAllDirection(grid, row - 1, col);
+            result &= MarkVisitedIslandByAllDirection(grid, row + 1, col);
+            result &= MarkVisitedIslandByAllDirection(grid, row, col + 1);
+           result &= MarkVisitedIslandByAllDirection(grid, row, col - 1);
+
+            return result;
+        }
         public static  int NumIslands(char[][] grid)
         {
             var result = 0;
@@ -124,7 +205,64 @@ namespace LeetCode
     internal class LeetCodeClass
     {
 
-        public static int[] SetMismatchLinq(int[] nums)
+    public static bool IsPalindromeRecursion (String name)
+        {
+            //Base case 
+            if ( name.Length == 0  || name.Length == 1) return true;
+            //Iteration - 1    racecar 
+            //Iteration - 2    aceca 
+            //Iteration - 3    cec
+            //Iteration - 4   e  becomes base case 
+            
+            if ( name.ElementAt(0) == name.ElementAt(name.Length - 1))
+            {
+                return IsPalindromeRecursion(name.Substring(1, name.Length - 2 ));
+            }
+
+
+
+            // Additional case to handle the non palindromes
+            return false;
+        }
+      public static string ReverseStringRecursion(string name)
+        {
+            if (name.Equals("")) return "";
+            // fn(ello) + h
+            // fn(llo) + e
+            // fn(lo) + 1 here oll is returned 
+            // fn(o) + l here ol is returned 
+            //fn('') + o here o is returned 
+
+            return ReverseStringRecursion(name.Substring(1)) + name.ElementAt(0);  
+
+        }
+      public static  int[] FindErrorNums(int[] nums)
+        {
+            //Brute force
+            //use HashSet to find duplicate number
+            //traverse the array to find the missing number
+            var set = new HashSet<int>();
+            int duplicate = -1, missing = -1;
+            var list = new List<int>(nums);
+            for (int i = 0; i < list.Count; i++)
+            {
+                if (set.Add(list[i]) == false)
+                {
+                    duplicate = nums[i];
+                    break;
+                }
+            }
+            for (int i = 0; i < list.Count; i++)
+            {
+                if (list.Contains(i + 1) == false)
+                {
+                    missing = i + 1;
+                    break;
+                }
+            }
+            return new int[] { duplicate, missing };
+        }
+       public static int[] SetMismatchLinq(int[] nums)
         {
             /*
              * You have a set of integers s, which originally contains all the numbers from 1 to n. Unfortunately, due to some error, one of the numbers in s got duplicated to another number in the set, 
@@ -136,7 +274,6 @@ namespace LeetCode
             var missingNumber = Enumerable.Range(1, nums.Length).Except(nums).FirstOrDefault(); 
             return new int[] { duplicate, missingNumber };
         }
-
         public static int[] SetMisMatch(int[] nums)
         {
             int duplicate = Int32.MinValue;
