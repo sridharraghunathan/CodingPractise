@@ -255,8 +255,58 @@ char[][] grid = new char[][]
       new char[] {'1' ,'0'   }
 };
 Console.WriteLine(Solution.NumIslands(grid));
-
-*/
-
-
 LeetCodeClass.LengthOfLongestSubstring("abcabcbb");
+Console.WriteLine(LeetCodeClass.ReverseWithSwap(-123456))
+
+int[] arr = new int[] { 1, 3, 4, 5, 6 };
+
+Console.WriteLine(LeetCodeClass.FindKthPositive( arr , k: 10));
+Console.WriteLine(LeetCodeClass.FindKthPositiveV1(arr, k: 10));
+
+ 
+int [] arr1 = LeetCodeClass.SetMismatchLinq(arr);
+print(arr1);
+int[] arr2 = LeetCodeClass.SetMismatchLinq(arr);
+print(arr2);
+ */
+
+int[] nums = new int[] { 1, 2, 3, 3, 6 };
+
+int [] arr = FindErrorNums(nums);
+print(arr);
+
+  int[] FindErrorNums(int[] nums)
+{
+    //Brute force
+    //use HashSet to find duplicate number
+    //traverse the array to find the missing number
+    var set = new HashSet<int>();
+    int duplicate = -1, missing = -1;
+    var list = new List<int>(nums);
+    for (int i = 0; i < list.Count; i++)
+    {
+        if (set.Add(list[i]) == false)
+        {
+            duplicate = nums[i];
+            break;
+        }
+    }
+    for (int i = 0; i < list.Count; i++)
+    {
+        if (list.Contains(i + 1) == false)
+        {
+            missing = i + 1;
+            break;
+        }
+    }
+    return new int[] { duplicate, missing };
+}
+
+
+void print(int[] arr)
+{
+    foreach( var item in arr)
+    {
+        Console.WriteLine(item);
+    }
+}

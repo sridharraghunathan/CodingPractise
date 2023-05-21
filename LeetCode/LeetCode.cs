@@ -28,7 +28,6 @@ namespace LeetCode
 
             return result;
         }
-
         private static void MarkVisitedIsland(char[][] grid, int row, int col)
         {
             if (row < 0 || row >= grid.Length) return;
@@ -58,7 +57,6 @@ namespace LeetCode
             this.val = val;
             this.next = next;
         }
-
         public ListNode AddTwoNumbers(ListNode l1, ListNode l2)
         {
             //Adding TWO Linked List 
@@ -95,10 +93,81 @@ namespace LeetCode
                 j--;
             }
         }
+        public static ListNode MergeKLists(ListNode[] lists)
+        {
+            if (lists.Length == 0) return null;
+            var newNode = new ListNode();
+            var ansNode = newNode;
+            var data = new List<int>();
+            foreach (var node in lists)
+            {
+                var tempNode = node;
+                while (tempNode != null)
+                {
+                    data.Add(tempNode.val);
+                    tempNode = tempNode.next;
+                }
+            }
+            if (data.Count == 0) return null;
+            data.Sort();
+            for (int i = 0; i < data.Count; i++)
+            {
+                newNode.val = data[i];
+                if (i != data.Count - 1)
+                    newNode.next = new ListNode();
+                newNode = newNode.next;
+            }
+            return ansNode;
+        }
 
     }
     internal class LeetCodeClass
     {
+
+        public static int[] SetMismatchLinq(int[] nums)
+        {
+            /*
+             * You have a set of integers s, which originally contains all the numbers from 1 to n. Unfortunately, due to some error, one of the numbers in s got duplicated to another number in the set, 
+             * which results in repetition of one number and loss of another number.
+                 Input: nums = [1, 2, 2, 4]
+                 Output: [2,3] 3 is missing and it was duplicated
+                 */
+            var duplicate = nums.GroupBy(x => x).Where(g => g.Count() == 2).Select(g => g.Key).FirstOrDefault();
+            var missingNumber = Enumerable.Range(1, nums.Length).Except(nums).FirstOrDefault(); 
+            return new int[] { duplicate, missingNumber };
+        }
+
+        public static int[] SetMisMatch(int[] nums)
+        {
+            int duplicate = Int32.MinValue;
+            int missingNumber = 0;
+            Dictionary<int, int> map = new Dictionary<int, int>();
+            for (int i = 0; i < nums.Length; i++)
+            {
+                if (!map.ContainsKey(i))
+                    map.Add(i, 1);
+                else
+                    map[i] ++;
+            }
+
+            for(int i = 0; i <= nums.Length; i++)
+            {
+                if (map.ContainsKey(i))
+                {
+                    if (map[i] == 2)
+                    {
+                        duplicate = map[i];
+                    }
+                }
+                else
+                {
+                    missingNumber = map[i];
+                }
+            }
+
+            return new[] {duplicate, missingNumber}; 
+
+        }
         public static void FindSingularNumber(int[] numbers)
         {
         //  Input: nums = [4, 1, 2, 1, 2]
@@ -453,7 +522,7 @@ Output: 5, 2
         }
         public static void MergeSortArray()
         {
-            /*
+            /* Already 2 array are sorted then we can just concatenate 2 array based on the merge.
             function mergeSortedArrays(arr1, arr2)
             {
                 let merged = [];
@@ -531,7 +600,6 @@ Output: 5, 2
             return 0;
 
         }
-         
         public static  int MaxSubArray(int[] nums)
         {
         //      Input: nums = [-2, 1, -3, 4, -1, 2, 1, -5, 4]
@@ -608,6 +676,24 @@ Output: 5, 2
             return ans * sign ;
 
         }
+        public static int ReverseWithSwap(int x)
+        {
+            var sign = Math.Sign(x);
+            var absolute = Math.Abs(x); 
+            var ConvertString = absolute.ToString().ToArray();
+            var j = ConvertString.Length - 1;
+            int i = 0;
+            while(i < j)
+            {
+                char temp = ConvertString[i];
+                ConvertString[i] = ConvertString[j];
+                ConvertString[j] = temp;
+                i++;
+                j--;
+            }
+            int.TryParse(ConvertString, out int result);
+            return result* sign;
+        }
         public static int MaxWaterContainerStoredBasedonArray(int[] height)
         {
             // Find the Max between either side of the array 
@@ -668,7 +754,15 @@ Output: 5, 2
             }
 
         }
-
+        public static int FindKthPositiveV1(int[] arr , int k)
+        {
+            var arrayMax = arr.Max(); /// 1,2,3,4,5
+            var max = k +arrayMax;
+            max =  k + arrayMax;
+            // IF GIVEN NUMBER IS NOT BEYOND 
+            var MissedElement = Enumerable.Range(1, max).Except(arr);
+            return MissedElement.ToArray()[k -1 ];
+        }
         public static int FindKthPositive(int[] arr, int k)
         {
             /* Input: arr = [2,3,4,7,11], k = 5

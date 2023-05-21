@@ -16,10 +16,11 @@ namespace LeetCode
             //short test = 1;  //All are case sensitive;
 
             string str = "sridhar";
+
+            // str.Reverse ===   Array.Reverse(str.ToCharArray()) after that we can use 
             IEnumerable<char> ch = str.Reverse();
             var r = string.Join("", ch);
             Console.WriteLine(r);
-
         }
         public static void Another()
         {
