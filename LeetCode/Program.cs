@@ -279,9 +279,9 @@ print(arr);
 char[][] grid1 = new char[][]
 {
     new char[] {'1' ,'1', '1', '1', '0'    },
-    new char[] { '1', '1', '0', '0' ,'0'  },
+    new char[] { '1', '1', '1', '0' ,'1'  },
     new char[] { '1' ,'1', '0', '1', '1' },
-       new char[] { '0' ,'0', '0', '1', '0' }
+    new char[] { '0' ,'0', '1', '1', '0' }
 };
 
 char[][] grid = new char[][]
@@ -299,14 +299,55 @@ int[][] grid2 = new int[][]
       new int[] {1 ,1  ,1 }
 
 };
+Console.WriteLine(Solution.NumOfClosedIsland(grid1));
+string name = "sridhar";
+Console.WriteLine(name.Substring(1, name.Length - 1)); 
 Console.WriteLine(Solution.NumOfClosedIsland(grid));
 Console.WriteLine(Solution.ClosedIsland(grid2));
 Console.WriteLine(LeetCodeClass.ReverseStringRecursion("hello")); 
-  */
 Console.WriteLine(LeetCodeClass.IsPalindromeRecursion("madam"));
+ */
 
-string name = "sridhar";
-Console.WriteLine(name.Substring(1, name.Length - 1)); 
+
+
+char[][] grid = new char[][]
+{
+      new char[] {'1' ,'0','1'},
+      new char[] {'1' ,'0','1'   },
+      new char[] {'1' ,'1'  ,'1' }
+};
+
+
+
+char[][] grid1 = new char[][]
+{
+    new char[] {'1' ,'1', '1', '1', '1'    },
+    new char[] { '1', '1', '1', '0' ,'1'   },
+    new char[] { '1' ,'1', '0', '1', '1'   },
+    new char[] { '1' ,'1', '1', '1', '1' }
+};
+
+int[,] multi = new int[2, 3] { { 12, 12, 12 }, { 12, 122, 12 } };
+Console.WriteLine(multi.GetLength(0)); //No of rows
+Console.WriteLine(multi.GetLength(1)); // No of Columns
+Console.WriteLine(multi.Length); // No of element
+Console.WriteLine(multi.GetUpperBound(0)); //
+Console.WriteLine(multi.GetLowerBound(1));
+
+Console.WriteLine("-----------");
+/// BASICS CREATING THE VISTED NODE SIMILAR TO THE EXISTING NODE
+/// 3 ROWS CREATION OF JAGGED ARRAY 
+/// bool [] []visited = new bool [3][]
+/// vistied[0] = new bool [3];
+/// visited[1] = new bool [3]
+/// visited[2] = new bool[3];
+
+bool[][] visited = new bool[grid.Length][];
+for (int i = 0; i < grid.Length; i++) visited[i] = new bool[grid[i].Length];
+
+Console.WriteLine(Solution.NumOfClosedIsland(grid1));
+ 
+ 
 void Print(int[] arr)
 {
     foreach( var item in arr)
