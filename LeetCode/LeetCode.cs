@@ -26,7 +26,7 @@ namespace LeetCode
                     if (grid[i][j] == '0')
                     {
                         var status = MarkVisitedIslandByAllDirection(grid, i, j);
-                        Console.WriteLine($"{i} {j} {status}");
+                       // Console.WriteLine($"{i} {j} {status}");
                         totalClosedIsland = status ? totalClosedIsland+1 : 0 ;
    
                     }
@@ -45,11 +45,25 @@ namespace LeetCode
             var result = true;
             // If all side are true then only true 
             // result = result && recursionFn
+            //For each and every element traverse all the direction is required.
+            int[] x = { -1, -1, -1, 1, 1, 1, 0, 0 };
+            int[] y = { -1, 0, 1, -1, 0, 1, 1, -1 };
+            for ( int i = 0; i < 8; i++)
+            {
+               int dx = x[i] + row; ;
+               int dy = y[i] + col;
+                result &= MarkVisitedIslandByAllDirection(grid, dx  , dy  );
+            }
+            /*
+            result &= MarkVisitedIslandByAllDirection(grid, row - 1, col -1);   
             result &= MarkVisitedIslandByAllDirection(grid, row - 1, col);
+            result &= MarkVisitedIslandByAllDirection(grid, row - 1, col + 1);
+            result &= MarkVisitedIslandByAllDirection(grid, row + 1, col -1);
             result &= MarkVisitedIslandByAllDirection(grid, row + 1, col);
+            result &= MarkVisitedIslandByAllDirection(grid, row + 1, col + 1);
             result &= MarkVisitedIslandByAllDirection(grid, row, col + 1);
            result &= MarkVisitedIslandByAllDirection(grid, row, col - 1);
-
+            */
             return result;
         }
         public static  int NumIslands(char[][] grid)

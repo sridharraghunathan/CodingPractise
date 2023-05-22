@@ -306,19 +306,6 @@ Console.WriteLine(Solution.NumOfClosedIsland(grid));
 Console.WriteLine(Solution.ClosedIsland(grid2));
 Console.WriteLine(LeetCodeClass.ReverseStringRecursion("hello")); 
 Console.WriteLine(LeetCodeClass.IsPalindromeRecursion("madam"));
- */
-
-
-
-char[][] grid = new char[][]
-{
-      new char[] {'1' ,'0','1'},
-      new char[] {'1' ,'0','1'   },
-      new char[] {'1' ,'1'  ,'1' }
-};
-
-
-
 char[][] grid1 = new char[][]
 {
     new char[] {'1' ,'1', '1', '1', '1'    },
@@ -345,6 +332,20 @@ Console.WriteLine("-----------");
 bool[][] visited = new bool[grid.Length][];
 for (int i = 0; i < grid.Length; i++) visited[i] = new bool[grid[i].Length];
 Console.WriteLine(Solution.NumOfClosedIsland(grid1));
+
+ */
+
+
+
+char[][] grid = new char[][]
+{
+      new char[] {'0' ,'1','1'},
+      new char[] {'1' ,'0','1'   },
+      new char[] {'1' ,'1'  ,'1' }
+};
+
+Console.WriteLine(Solution.NumOfClosedIsland(grid));
+
  
  
 void Print(int[] arr)
