@@ -344,7 +344,6 @@ Console.WriteLine("-----------");
 
 bool[][] visited = new bool[grid.Length][];
 for (int i = 0; i < grid.Length; i++) visited[i] = new bool[grid[i].Length];
-
 Console.WriteLine(Solution.NumOfClosedIsland(grid1));
  
  
