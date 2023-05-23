@@ -4,13 +4,93 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+
+
 namespace LeetCode
 {
     //DataStructures GitHub.
     //.https://github.com/anirban-s/data-structures-and-algorithms/tree/master/4.%20DS%20-%20Stack%20and%20Queue
 
+   public class MergeSort
+    {
+        public static int[] mergeSort(int[] array)
+        {
+            int[] left;
+            int[] right;
+            int[] result = new int[array.Length];
+            //As this is a recursive algorithm, we need to have a base case to 
+            //avoid an infinite recursion and therfore a stackoverflow
+            if (array.Length <= 1)
+                return array;
 
-    public class Solution
+            int midPoint = array.Length / 2;
+            left = new int[midPoint];
+
+            if (array.Length % 2 == 0)
+                right = new int[midPoint];
+            else
+                right = new int[midPoint + 1];
+
+            for (int i = 0; i < midPoint; i++)
+                left[i] = array[i];
+
+            int x = 0;
+            for (int i = midPoint; i < array.Length; i++)
+            {
+                right[x] = array[i];
+                x++;
+            }
+            //Recursively sort the left array
+            left = mergeSort(left);
+            //Recursively sort the right array
+            right = mergeSort(right);
+            //Merge our two sorted arrays
+            result = merge(left, right);
+            return result;
+        }
+        public static int[] merge(int[] left, int[] right)
+        {
+            int resultLength = right.Length + left.Length;
+            int[] result = new int[resultLength];
+
+            int indexLeft = 0, indexRight = 0, indexResult = 0;
+
+            while (indexLeft < left.Length || indexRight < right.Length)
+            {
+                if (indexLeft < left.Length && indexRight < right.Length)
+                {
+                    if (left[indexLeft] <= right[indexRight])
+                    {
+                        result[indexResult] = left[indexLeft];
+                        indexLeft++;
+                        indexResult++;
+                    }
+                    else
+                    {
+                        result[indexResult] = right[indexRight];
+                        indexRight++;
+                        indexResult++;
+                    }
+                }
+                else if (indexLeft < left.Length)
+                {
+                    result[indexResult] = left[indexLeft];
+                    indexLeft++;
+                    indexResult++;
+                }
+                else if (indexRight < right.Length)
+                {
+                    result[indexResult] = right[indexRight];
+                    indexRight++;
+                    indexResult++;
+                }
+            }
+            return result;
+        }
+
+    }
+
+     public class Solution
     {
         public static int NumOfClosedIsland(char[][] grid)
         {
@@ -100,8 +180,6 @@ namespace LeetCode
 
         }
     }
-
-
     public class ListNode
     {
         public int val;
@@ -177,6 +255,88 @@ namespace LeetCode
     }
     internal class LeetCodeClass
     {
+
+        public static int[] merge(int[] left , int[] right)
+        {
+            // Check either of the Length has value 
+            int leftArrayIndex = 0, rightArrayIndex = 0, combinedArrayIndex = 0;
+            int[] CombinedArray = new int [left.Length + right.Length];
+            
+            while (leftArrayIndex < left.Length || rightArrayIndex < right.Length)
+            {
+                // Both array should have some value 
+                if (leftArrayIndex <left.Length && rightArrayIndex < right.Length)  {
+
+                    // if left is less than right the store in combined array with left value
+                    if (left[leftArrayIndex] < right[rightArrayIndex])
+                    {
+                        CombinedArray[combinedArrayIndex] = left[leftArrayIndex];
+                        leftArrayIndex++;
+                        combinedArrayIndex++;
+                    }
+                    // if right is less than left the store in combined array with right value
+                    else   
+                    {
+                        CombinedArray[combinedArrayIndex] = right[rightArrayIndex];
+                        rightArrayIndex++;
+                        combinedArrayIndex++;
+                    }
+                }
+                // on of the array has is still left those alone already sorted so we move it directly
+                else if (leftArrayIndex < left.Length) {
+                    CombinedArray[combinedArrayIndex] = left[leftArrayIndex];
+                    leftArrayIndex++;
+                    combinedArrayIndex++;
+                }
+                // on of the array has is still left those alone already sorted so we move it directly
+                else if (rightArrayIndex < right.Length)    {
+
+                    CombinedArray[combinedArrayIndex] = right[rightArrayIndex];
+                    rightArrayIndex++;
+                    combinedArrayIndex++;
+                }
+            } 
+            return CombinedArray;
+        }
+
+        public static int[] MergeSortM(int[] array)
+        {
+            if ( array.Length <= 1 ) return array;
+            int[] result = new int[array.Length];
+            int[] left;
+            int[] right;
+  
+            int midPoint = array.Length / 2;
+            left = new int[midPoint];
+
+            if (array.Length % 2 == 0)
+                right = new int[midPoint];
+            else
+                right = new int[midPoint + 1];
+
+            for (int i = 0; i < midPoint; i++)
+                left[i] = array[i];
+
+            int x = 0;
+            for (int i = midPoint; i < array.Length; i++)
+            {
+                right[x] = array[i];
+                x++;
+            }
+
+            left = MergeSortM(left);
+            right = MergeSortM(right);
+            result = merge(left, right);
+            return result;
+        }
+
+
+
+
+
+
+
+
         public static bool IsPalindromeRecursion (String name)
         {
             //Base case 
@@ -350,6 +510,53 @@ namespace LeetCode
             }
             return true;
         }
+
+
+        public  static string longestPalindrome(string s)
+        {
+
+            // 1. Generate substring
+            // 2. Check for palindrome or not
+            // 3.  Track the longest palindrome using ans and maxlen variable
+
+            int maxlen = 0;
+            string ans = "";
+
+            int len = s.Length;
+
+            for (int i = 0; i < len; i++)
+            {
+                for (int j = i + 1; j <= len; j++)
+                {
+                    // System.out.println(substr);
+
+                    // This if condition is very helpful in avoiding checking for palindrome 
+                    // of small strings
+                    if (j - i >= maxlen)
+                    {
+                        // only proceed if current substr length is >= current longest palindromic substring
+
+                        String substr = s.Substring(i, j);
+                        if (Palindrome(substr))
+                        {
+
+                            int l = substr.Length;
+
+                            if (l > maxlen)
+                            {
+                                maxlen = l;
+                                ans = substr;
+                            }
+                        }
+
+                    }
+
+                }
+            }
+
+            return ans;
+        }
+
         public static IEnumerable<int> FindFibonacciSeries(short number)
         {
             // 1,1,2,3,5,8,13

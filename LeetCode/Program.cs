@@ -332,22 +332,34 @@ Console.WriteLine("-----------");
 bool[][] visited = new bool[grid.Length][];
 for (int i = 0; i < grid.Length; i++) visited[i] = new bool[grid[i].Length];
 Console.WriteLine(Solution.NumOfClosedIsland(grid1));
-
- */
-
-
-
 char[][] grid = new char[][]
 {
       new char[] {'0' ,'1','1'},
-      new char[] {'1' ,'0','1'   },
-      new char[] {'1' ,'1'  ,'1' }
+      new char[] {'1' ,'0','1'   },     new char[] {'1' ,'1'  ,'1' }
 };
 
 Console.WriteLine(Solution.NumOfClosedIsland(grid));
 
+int[] numbers = { 4, 5, 8, 6 };
+int mid = numbers.Length / 2;
+Print(numbers[..2]);
+Console.WriteLine("-----");
+Print(numbers[mid..]);
  
- 
+
+
+int[] left = new int[] { 1, 2, 3, 4 };
+int[] right = new int[] { 5, 6, 7, 8 };
+
+Print(LeetCodeClass.merge(left , right));
+ */
+
+
+var res = LeetCodeClass.MergeSortM(arrayOfRecurring);
+//var res =  MergeSort.mergeSort(arrayOfRecurring);
+Print(res);
+
+
 void Print(int[] arr)
 {
     foreach( var item in arr)
