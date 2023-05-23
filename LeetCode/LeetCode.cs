@@ -254,8 +254,7 @@ namespace LeetCode
 
     }
     internal class LeetCodeClass
-    {
-
+    { 
         public static int[] merge(int[] left , int[] right)
         {
             // Check either of the Length has value 
@@ -298,7 +297,6 @@ namespace LeetCode
             } 
             return CombinedArray;
         }
-
         public static int[] MergeSortM(int[] array)
         {
             if ( array.Length <= 1 ) return array;
