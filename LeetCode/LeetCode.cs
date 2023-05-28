@@ -1,6 +1,8 @@
-﻿using System;
+﻿using BinarySearchTreeDFS;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -10,87 +12,8 @@ namespace LeetCode
 {
     //DataStructures GitHub.
     //.https://github.com/anirban-s/data-structures-and-algorithms/tree/master/4.%20DS%20-%20Stack%20and%20Queue
-
-   public class MergeSort
-    {
-        public static int[] mergeSort(int[] array)
-        {
-            int[] left;
-            int[] right;
-            int[] result = new int[array.Length];
-            //As this is a recursive algorithm, we need to have a base case to 
-            //avoid an infinite recursion and therfore a stackoverflow
-            if (array.Length <= 1)
-                return array;
-
-            int midPoint = array.Length / 2;
-            left = new int[midPoint];
-
-            if (array.Length % 2 == 0)
-                right = new int[midPoint];
-            else
-                right = new int[midPoint + 1];
-
-            for (int i = 0; i < midPoint; i++)
-                left[i] = array[i];
-
-            int x = 0;
-            for (int i = midPoint; i < array.Length; i++)
-            {
-                right[x] = array[i];
-                x++;
-            }
-            //Recursively sort the left array
-            left = mergeSort(left);
-            //Recursively sort the right array
-            right = mergeSort(right);
-            //Merge our two sorted arrays
-            result = merge(left, right);
-            return result;
-        }
-        public static int[] merge(int[] left, int[] right)
-        {
-            int resultLength = right.Length + left.Length;
-            int[] result = new int[resultLength];
-
-            int indexLeft = 0, indexRight = 0, indexResult = 0;
-
-            while (indexLeft < left.Length || indexRight < right.Length)
-            {
-                if (indexLeft < left.Length && indexRight < right.Length)
-                {
-                    if (left[indexLeft] <= right[indexRight])
-                    {
-                        result[indexResult] = left[indexLeft];
-                        indexLeft++;
-                        indexResult++;
-                    }
-                    else
-                    {
-                        result[indexResult] = right[indexRight];
-                        indexRight++;
-                        indexResult++;
-                    }
-                }
-                else if (indexLeft < left.Length)
-                {
-                    result[indexResult] = left[indexLeft];
-                    indexLeft++;
-                    indexResult++;
-                }
-                else if (indexRight < right.Length)
-                {
-                    result[indexResult] = right[indexRight];
-                    indexRight++;
-                    indexResult++;
-                }
-            }
-            return result;
-        }
-
-    }
-
-     public class Solution
+     
+    public class Solution
     {
         public static int NumOfClosedIsland(char[][] grid)
         {
@@ -254,17 +177,17 @@ namespace LeetCode
 
     }
     internal class LeetCodeClass
-    { 
-        public static int[] merge(int[] left , int[] right)
+    {
+        public static int[] merge(int[] left, int[] right)
         {
             // Check either of the Length has value 
             int leftArrayIndex = 0, rightArrayIndex = 0, combinedArrayIndex = 0;
-            int[] CombinedArray = new int [left.Length + right.Length];
-            
+            int[] CombinedArray = new int[left.Length + right.Length];
+
             while (leftArrayIndex < left.Length || rightArrayIndex < right.Length)
             {
                 // Both array should have some value 
-                if (leftArrayIndex <left.Length && rightArrayIndex < right.Length)  {
+                if (leftArrayIndex < left.Length && rightArrayIndex < right.Length) {
 
                     // if left is less than right the store in combined array with left value
                     if (left[leftArrayIndex] < right[rightArrayIndex])
@@ -274,7 +197,7 @@ namespace LeetCode
                         combinedArrayIndex++;
                     }
                     // if right is less than left the store in combined array with right value
-                    else   
+                    else
                     {
                         CombinedArray[combinedArrayIndex] = right[rightArrayIndex];
                         rightArrayIndex++;
@@ -288,23 +211,26 @@ namespace LeetCode
                     combinedArrayIndex++;
                 }
                 // on of the array has is still left those alone already sorted so we move it directly
-                else if (rightArrayIndex < right.Length)    {
+                else if (rightArrayIndex < right.Length) {
 
                     CombinedArray[combinedArrayIndex] = right[rightArrayIndex];
                     rightArrayIndex++;
                     combinedArrayIndex++;
                 }
-            } 
+            }
             return CombinedArray;
         }
         public static int[] MergeSortM(int[] array)
         {
-            if ( array.Length <= 1 ) return array;
+            if (array.Length <= 1) return array;
             int[] result = new int[array.Length];
             int[] left;
             int[] right;
-  
+
             int midPoint = array.Length / 2;
+            left = array[0..midPoint];
+            right = array[midPoint..];
+            /*
             left = new int[midPoint];
 
             if (array.Length % 2 == 0)
@@ -321,35 +247,42 @@ namespace LeetCode
                 right[x] = array[i];
                 x++;
             }
-
+            */
             left = MergeSortM(left);
             right = MergeSortM(right);
             result = merge(left, right);
             return result;
         }
+        public static int[] RotateArrayKTimes(int[] arr, int k)
+        {
+            int[] newArr = new int[arr.Length];
+            //shifting the element K times
+            for (int i = 0; i < arr.Length; i++)
+            {
+                int position = (i + k) % arr.Length;
+                // 0 + 2  = 2 position  total length = 4
+                // 3 + 2  = 5 % 4  = 1  position 
+                newArr[position] = arr[i];
+            }
+
+            return newArr;
 
 
-
-
-
-
-
-
-        public static bool IsPalindromeRecursion (String name)
+        }
+        public static bool IsPalindromeRecursion(String name)
         {
             //Base case 
-            if ( name.Length == 0  || name.Length == 1) return true;
+            if (name.Length == 0 || name.Length == 1) return true;
             //Iteration - 1    racecar 
             //Iteration - 2    aceca 
             //Iteration - 3    cec
             //Iteration - 4   e  becomes base case 
-            
-            if ( name.ElementAt(0) == name.ElementAt(name.Length - 1))
+
+            if (name.ElementAt(0) == name.ElementAt(name.Length - 1))
             {
-                return IsPalindromeRecursion(name.Substring(1, name.Length - 2 ));
+                //SUBSTRING IS ZERO BASED.
+                return IsPalindromeRecursion(name.Substring(1, name.Length - 2));
             }
-
-
 
             // Additional case to handle the non palindromes
             return false;
@@ -363,10 +296,10 @@ namespace LeetCode
             // fn(o) + l here ol is returned 
             //fn('') + o here o is returned 
 
-            return ReverseStringRecursion(name.Substring(1)) + name.ElementAt(0);  
+            return ReverseStringRecursion(name.Substring(1)) + name.ElementAt(0);
 
         }
-        public static  int[] FindErrorNums(int[] nums)
+        public static int[] FindErrorNums(int[] nums)
         {
             //Brute force
             //use HashSet to find duplicate number
@@ -401,7 +334,7 @@ namespace LeetCode
                  Output: [2,3] 3 is missing and it was duplicated
                  */
             var duplicate = nums.GroupBy(x => x).Where(g => g.Count() == 2).Select(g => g.Key).FirstOrDefault();
-            var missingNumber = Enumerable.Range(1, nums.Length).Except(nums).FirstOrDefault(); 
+            var missingNumber = Enumerable.Range(1, nums.Length).Except(nums).FirstOrDefault();
             return new int[] { duplicate, missingNumber };
         }
         public static int[] SetMisMatch(int[] nums)
@@ -414,10 +347,10 @@ namespace LeetCode
                 if (!map.ContainsKey(i))
                     map.Add(i, 1);
                 else
-                    map[i] ++;
+                    map[i]++;
             }
 
-            for(int i = 0; i <= nums.Length; i++)
+            for (int i = 0; i <= nums.Length; i++)
             {
                 if (map.ContainsKey(i))
                 {
@@ -432,14 +365,14 @@ namespace LeetCode
                 }
             }
 
-            return new[] {duplicate, missingNumber}; 
+            return new[] { duplicate, missingNumber };
 
         }
         public static void FindSingularNumber(int[] numbers)
         {
-        //  Input: nums = [4, 1, 2, 1, 2]
+            //  Input: nums = [4, 1, 2, 1, 2]
 
-      //  Output: 4
+            //  Output: 4
             int i = 0;
             Dictionary<int, int> dict = new Dictionary<int, int>();
             int end = numbers.Length - 1;
@@ -458,9 +391,9 @@ namespace LeetCode
         }
         public string LongestPalindromeSubstring(string s)
         {
-        //amma //madam 
-     //   Input: s = "babad"
-//Output: "bab"
+            //amma //madam 
+            //   Input: s = "babad"
+            //Output: "bab"
 
             int start = 0;
             int end = 0;
@@ -471,7 +404,7 @@ namespace LeetCode
                 int length1 = FindLongestPalindrome(s, i, i);
                 int length2 = FindLongestPalindrome(s, i, i + 1);
                 int length = Math.Max(length1, length2);
-                // 4 // babad 1 - (4 - 1) /2 => 1
+                // 4 // babad 1 - (3 - 1) /2 => 1
                 if (length > (end - start))
                 {
                     start = i - (length - 1) / 2;
@@ -485,6 +418,7 @@ namespace LeetCode
         public int FindLongestPalindrome(string s, int left, int right)
         {
 
+
             if (left < 0 || right > s.Length)
                 return 0;
 
@@ -493,7 +427,9 @@ namespace LeetCode
                 left--;
                 right++;
             }
-
+            //01234  
+            //babad
+            //3 -(-1) - 1 = 4 - 1 = 3
             return right - left - 1;
         }
         public static bool Palindrome(string newstring)
@@ -508,9 +444,7 @@ namespace LeetCode
             }
             return true;
         }
-
-
-        public  static string longestPalindrome(string s)
+        public static string longestPalindrome(string s)
         {
 
             // 1. Generate substring
@@ -539,6 +473,7 @@ namespace LeetCode
                         {
 
                             int l = substr.Length;
+                            // maxlen = Math.Max(l,maxlen);
 
                             if (l > maxlen)
                             {
@@ -554,7 +489,6 @@ namespace LeetCode
 
             return ans;
         }
-
         public static IEnumerable<int> FindFibonacciSeries(short number)
         {
             // 1,1,2,3,5,8,13
@@ -616,13 +550,13 @@ namespace LeetCode
                 arr[i] = temp;
             }
         }
-        public static int Fibonacci(int n)
+        public static int Factorial(int n)
         {
             // when we use recursive series always have base condition and return keyword must
             if (n == 1)
                 return 1;
 
-            int temp = n * Fibonacci(n - 1);
+            int temp = n * Factorial(n - 1);
             return temp;
 
         }
@@ -658,6 +592,8 @@ namespace LeetCode
             //(6 3 0 5 ) –> (3 6 0 5 ), Here, algorithm compares the first two elements, and swaps since 6 > 3.
             //(3 6 0 5) –> (3 0 6 5 ), Swap since 6 > 0
             //(3 0 6 5) –> (3 0 5 6 ), Swap since 6 > 5
+
+
             int n = arr.Length;
             for (int i = 0; i < n - 1; i++)
                 for (int j = 0; j < n - i - 1; j++)
@@ -674,15 +610,15 @@ namespace LeetCode
             (int Id, string Name, char Gender) person = (1, "Sridhar", 'M');
             return person;
         }
-        public  static  void printLeaders( )
+        public static void printLeaders()
         {
-/*
-        Input: arr[] = { 16, 17, 4, 3, 5, 2 },
-Output: 17, 5, 2
+            /*
+                    Input: arr[] = { 16, 17, 4, 3, 5, 2 },
+            Output: 17, 5, 2
 
-Input: arr[] = { 1, 2, 3, 4, 5, 2 },
-Output: 5, 2
-*/
+            Input: arr[] = { 1, 2, 3, 4, 5, 2 },
+            Output: 5, 2
+            */
             int[] arr = new int[] { 16, 17, 4, 3, 5, 2 };
             int n = arr.Length;
 
@@ -700,15 +636,18 @@ Output: 5, 2
                 }
             }
         }
-        public static int[] MergeArray(int[, ] array, int N, int[] output)
+        public static int[] MergeArray(int[,] array, int N, int[] output)
         {
             // Sorting the 2D array by coverting to 1D and Sorting the code.
             var col = array.GetLength(1);
+            int k = 0;
             for (int i = 0; i < N; i++)
             {
+
                 for (int j = 0; j < col; j++)
                     //Convert 2D Array to 1D Array and Sort the Array .
-                    output[i+j] = array[i, j];
+                    output[k] = array[i, j];
+                k++;
             }
 
             Array.Sort(output);
@@ -719,8 +658,8 @@ Output: 5, 2
             // If the column or row has one occurence of Zero then make entire row and column as Zero using Jagged Array
             HashSet<int> row = new HashSet<int>();
             HashSet<int> col = new HashSet<int>();
-            var noOfRows = array.GetLength(0); 
-         
+            var noOfRows = array.GetLength(0);
+
 
             for (int i = 0; i < noOfRows; i++)
             {
@@ -728,7 +667,7 @@ Output: 5, 2
 
                 for (int j = 0; j < noOfCols; j++)
                 {
-                    if (array[i] [j] == 0)
+                    if (array[i][j] == 0)
                     {
                         row.Add(i);
                         col.Add(j);
@@ -745,7 +684,7 @@ Output: 5, 2
                     if (row.Contains(i) || row.Contains(j))
                     {
                         // Making entire row and column as Zero if it has one occurence of Zero.
-                        array[i][ j] = 0;
+                        array[i][j] = 0;
                     }
                 }
             }
@@ -754,19 +693,19 @@ Output: 5, 2
             return array;
 
         }
-        public static int[,]  MakeZero(int[,] array)  
+        public static int[,] MakeZero(int[,] array)
         {
             // If the column or row has one occurence of Zero then make entire row and column as Zero using MultiDimensional Array
             HashSet<int> row = new HashSet<int>();
             HashSet<int> col = new HashSet<int>();
-             var noOfRows = array.GetLength(0);
+            var noOfRows = array.GetLength(0);
             var noOfCols = array.GetLength(1);
 
             for (int i = 0; i < noOfRows; i++)
             {
-                for (int j= 0; j < noOfCols; j++)
+                for (int j = 0; j < noOfCols; j++)
                 {
-                    if (array[i,j] == 0)
+                    if (array[i, j] == 0)
                     {
                         row.Add(i);
                         col.Add(j);
@@ -779,10 +718,10 @@ Output: 5, 2
             {
                 for (int j = 0; j < noOfCols; j++)
                 {
-                    if (row.Contains(i)|| row.Contains(j))
+                    if (row.Contains(i) || row.Contains(j))
                     {
-                        
-                        array[i,j] = 0;
+
+                        array[i, j] = 0;
                     }
                 }
             }
@@ -790,7 +729,7 @@ Output: 5, 2
 
             return array;
 
-        } 
+        }
         public static bool PrimeNumber(int n)
         {
             // 2,3,5,7,11,13,17
@@ -801,7 +740,7 @@ Output: 5, 2
             for (i = 2; i <= m; i++)
             {
                 if (n % i == 0) // number is divisible then its not prime number.
-                { 
+                {
                     flag = 1;
                     break;
                 }
@@ -893,10 +832,10 @@ Output: 5, 2
         {
             // IF THE ARRAY HAS DUPLICATES THEN RETURN FIRST DUPLICATE POSITION
             int i = 0;
-  
+
             var map = new HashSet<int>();
 
-            while( i < nums.Length)
+            while (i < nums.Length)
             {
 
                 if (!map.Contains(nums[i]))
@@ -907,17 +846,17 @@ Output: 5, 2
                 {
                     return nums[i];
                 }
-               
+
                 i++;
             }
- 
+
             return 0;
 
         }
-        public static  int MaxSubArray(int[] nums)
+        public static int MaxSubArray(int[] nums)
         {
-        //      Input: nums = [-2, 1, -3, 4, -1, 2, 1, -5, 4]
-        //Output: 6
+            //      Input: nums = [-2, 1, -3, 4, -1, 2, 1, -5, 4]
+            //Output: 6
             int max = nums[0];
             int tmp = 0;
             for (int i = 0; i < nums.Length; i++)
@@ -938,7 +877,8 @@ Output: 5, 2
         {
             int lastZeroPos = 0;
             // MOVE THE ZEROS TO LAST by TRAVERSE THE ARRAY
-            for (int i = 0; i < nums.Length; i++)
+            for (int i = 0;
+                i < nums.Length; i++)
             {
                 if (nums[i] != 0)
                 {
@@ -947,7 +887,7 @@ Output: 5, 2
                 }
             }
         }
-        public static  int LengthOfLongestSubstring(string s)
+        public static int LengthOfLongestSubstring(string s)
         {
             //abcabcbb
             // Here  we need to find the Longest string without repeating 
@@ -973,31 +913,32 @@ Output: 5, 2
         public static int ReverseNumber(int x)
         {
             // scenario - 1 giving the -123 => -321
-                int ans = 0;
+            int ans = 0;
             int sign = Math.Sign(x); // - 1
             int absNumber = Math.Abs(x); // without negative sign
             int remainder = 0;
 
-          while (absNumber > 0)
+            while (absNumber > 0)
             {
                 remainder = absNumber % 10;
                 ans = ans * 10 + remainder;
                 absNumber = absNumber / 10;
             }
 
-          if (ans > int.MaxValue)  
+            if (ans > int.MaxValue)
                 return 0;
-            return ans * sign ;
+            return ans * sign;
 
         }
         public static int ReverseWithSwap(int x)
         {
+            /// reverse the number -123 with -321
             var sign = Math.Sign(x);
-            var absolute = Math.Abs(x); 
+            var absolute = Math.Abs(x);
             var ConvertString = absolute.ToString().ToArray();
             var j = ConvertString.Length - 1;
             int i = 0;
-            while(i < j)
+            while (i < j)
             {
                 char temp = ConvertString[i];
                 ConvertString[i] = ConvertString[j];
@@ -1006,7 +947,7 @@ Output: 5, 2
                 j--;
             }
             int.TryParse(ConvertString, out int result);
-            return result* sign;
+            return result * sign;
         }
         public static int MaxWaterContainerStoredBasedonArray(int[] height)
         {
@@ -1014,11 +955,11 @@ Output: 5, 2
             // whichever is smaller then move to next level 
             // calculate the water based on Minimum value 
             // compare the water container with old and new which ever is larger that will be the max
-            int max =int.MinValue;
+            int max = int.MinValue;
             int startIndex = 0;
             int endIndex = height.Length - 1; // LAST VALUE
 
-            while(startIndex < endIndex)
+            while (startIndex < endIndex)
             {
                 max = Math.Max(max, Math.Min(height[startIndex], height[endIndex]) * (endIndex - startIndex));
 
@@ -1033,7 +974,7 @@ Output: 5, 2
             int sum = 0;
             int number = num;
             // Armstrong Number is (1^3) + ( 5^3 ) + ( 3^3) = Given Number
-            while ( number > 0 )
+            while (number > 0)
             {
                 number = number % 10;
                 sum = sum + number ^ 3;
@@ -1068,14 +1009,14 @@ Output: 5, 2
             }
 
         }
-        public static int FindKthPositiveV1(int[] arr , int k)
+        public static int FindKthPositiveV1(int[] arr, int k)
         {
             var arrayMax = arr.Max(); /// 1,2,3,4,5
-            var max = k +arrayMax;
-            max =  k + arrayMax;
+            var max = k + arrayMax;
+            max = k + arrayMax;
             // IF GIVEN NUMBER IS NOT BEYOND 
             var MissedElement = Enumerable.Range(1, max).Except(arr);
-            return MissedElement.ToArray()[k -1 ];
+            return MissedElement.ToArray()[k - 1];
         }
         public static int FindKthPositive(int[] arr, int k)
         {
@@ -1103,6 +1044,480 @@ Explanation: The missing positive integers are [5,6,7,...]. The 2nd missing posi
             }
             return l + k;
         }
+        public static string LongestCommonPrefix(string[] strs)
+        {
+
+            //      Input: strs = ["flower", "flow", "flight"]
+            //Output: "fl"
+            //We need to find shortest element of array to put in for loop.
+            //Or we can get OutOfRange error.
+
+            //Length of the shortest element.
+            int minLength = strs.Min(x => x.Length);
+
+            //Shotest element itself.
+            string shortest_element = strs.FirstOrDefault(x => x.Length == minLength);
+
+            //Going through the all elements in the list.
+            foreach (string item in strs)
+            {
+
+                //Once we have an element we going through each character in this element.
+                for (int j = 0; j < minLength; j++)
+                {
+
+                    //We need to set the index to minLength where characters are not equal to each other.
+                    //We will use this minLength to cut the prefix from the shortest element.
+                    if (item[j] != shortest_element[j])
+                    {
+                        minLength = j;
+                        break;
+
+                    }
+                }
+
+            }
+
+            if (minLength == 0)
+            {
+                return "";
+            }
+            //Once we found minLength we can cut the shortest element from 0's character to minLength's character.
+            return shortest_element.Substring(0, minLength);
+        }
+        public static string LongestCommonPrefix1(string[] ss)
+        {
+
+            //      Input: strs = ["flower", "flow", "flight"]
+            //Output: "fl"
+            string shortest = ss.OrderBy(s => s.Length).First();
+
+            for (int i = 0; i < shortest.Length; i++)
+            {
+                if (ss.Select(s => s[i]).Distinct().Count() > 1) return shortest[..i];
+            }
+
+            return shortest;
+        }
+        public static List<int[]> ThreeSum(int[] nums) {
+
+            //  Input: nums = [-1, 0, 1, 2, -1, -4]
+            //Output: [[-1,-1,2],[-1,0,1]]
+            //SUm of the three numbers is zero.
+            //Sort the element in Ascending Order so we can easily check 
+            Array.Sort(nums);
+            int maxLoopLen = nums.Length - 2;
+            // First Loop thro all the element by fixing one element.
+            List<int[]> array = new List<int[]>();
+            for (int i = 0; i < maxLoopLen; i++)
+            {
+                int first = nums[i];
+                int start = i + 1;
+                int end = nums.Length - 1;
+
+                if (i > 0 && nums[i] == nums[i - 1]) continue;
+
+                while (start < end)
+                {
+                    int sum = first + nums[start] + nums[end];
+
+
+                    if (sum == 0) {
+                        array.Add(new int[] { first, nums[start], nums[end] });
+                        start++;
+
+                        while (nums[start] == nums[start - 1] && start < end)
+                        {
+                            start++;
+                        }
+
+                    }
+                    else if (sum > 0)
+                    {
+                        end--;
+                    } else { start++; }
+
+
+                }
+
+
+
+            }
+            //If duplicate then continue the Loop
+            // Check if the second element and third element with First see if sum is zero.
+            // sum > 0 or sum < 0 move the pointer accordingly
+            return array;
+        }
+        public static IList<IList<int>> ThreeSumV1(int[] nums)
+        {
+            //Sort the element in Ascending Order so we can easily check 
+            Array.Sort(nums);
+            int maxLoopLen = nums.Length - 2;
+            // First Loop thro all the element by fixing one element.
+            IList<IList<int>> array = new List<IList<int>>();
+            for (int i = 0; i < maxLoopLen; i++)
+            {
+                int first = nums[i];
+                int start = i + 1;
+                int end = nums.Length - 1;
+
+                if (i > 0 && nums[i] == nums[i - 1]) { continue; }
+
+                while (start < end)
+                {
+                    int sum = first + nums[start] + nums[end];
+                    if (sum == 0)
+                    {
+                        array.Add(new List<int> { first, nums[start], nums[end] });
+                        start++;
+                        end--;
+
+                        while (nums[start] == nums[start - 1] && start < end)
+                        {
+                            start++;
+                        }
+
+                    }
+                    else if (sum > 0)
+                    {
+                        end--;
+                    }
+                    else { start++; }
+
+                }
+            }
+            return array;
+        }
+        public static int ThreeSumClosest(int[] nums, int target)
+        {
+            /*
+        Input: nums = [-1, 2, 1, -4], target = 1
+Output: 2
+Explanation: The sum that is closest to the target is 2. (-1 + 2 + 1 = 2).
+            */
+            //Sort the element in Ascending Order so we can easily check 
+            Array.Sort(nums);
+            int maxLoopLen = nums.Length - 2;
+            int minDiff = Int32.MaxValue;
+            int closest = 0;
+            // First Loop thro all the element by fixing one element.
+
+            for (int i = 0; i < maxLoopLen; i++)
+            {
+                int first = nums[i];
+                int start = i + 1;
+                int end = nums.Length - 1;
+
+                if (i > 0 && nums[i] == nums[i - 1]) { continue; }
+
+                while (start < end)
+                {
+                    int sum = first + nums[start] + nums[end];
+                    int diff = Math.Abs(target - sum);
+                    if (diff < minDiff)
+                    {
+                        minDiff = diff;
+                        closest = sum;
+                    } else
+                    {
+                        start++;
+                        end--;
+                    }
+
+                }
+            }
+            return closest;
+        }
+        public static int MaxProfit(int[] prices)
+        {
+            /*
+        Input: prices = [7, 1, 5, 3, 6, 4]
+Output: 5
+Explanation: Buy on day 2(price = 1) and sell on day 5(price = 6), profit = 6 - 1 = 5.
+Note that buying on day 2 and selling on day 1 is not allowed because you must buy before you sell.
+            */
+            int minPrice = int.MaxValue;
+            int maxProfit = 0;
+
+            for (int i = 0; i < prices.Length; i++)
+            {
+                if (prices[i] < minPrice)
+                {
+                    minPrice = prices[i];
+                }
+
+                int profit = prices[i] - minPrice;
+                if (profit > maxProfit)
+                {
+                    maxProfit = profit;
+                }
+            }
+
+            return maxProfit;
+        }
+        public static int MaxProfitv1(int[] prices)
+        {
+            int profit = 0;
+            int maxProfit = 0;
+            int i = 0, j = i + 1;
+            while (j < prices.Length)
+            {
+                if (prices[i] < prices[j])
+                {
+                    profit = prices[j] - prices[i];
+                    maxProfit = Math.Max(profit, maxProfit);
+                }
+                else
+                {
+                    i = j;
+                }
+                j++;
+            }
+            return maxProfit;
+        }
+        public static void Rotate(int[][] matrix)
+        {
+            //matrix Rotation
+            //Input: matrix = [
+            //   [1,2,3], -> [7,4,1]
+            //    [4,5,6], -> [8,5,2],
+            //    [7,8,9] -> [9,6,3]
+            //    ]
+            //Output: [[7,4,1],[8,5,2],[9,6,3]]
+            List<List<int>> result = new List<List<int>>();
+
+            var len = matrix.GetLength(0);
+            for (int i = 0; i < len; i++)
+            {
+                List<int> temp = new List<int>();
+                for (int j = len - 1; j >= 0; j--)
+                {
+                    temp.Add(matrix[j][i]);
+                }
+                result.Add(temp);
+            }
+
+            for (int i = 0; i < result.Count; i++)
+            {
+                matrix[i] = result[i].ToArray();
+            }
+
+
+        }
+        public static int StrStr(string haystack, string needle)
+        {
+            //Input: haystack = "sadbutsad", needle = "sad"
+            //   Output: 0
+            //Explanation: "sad" occurs at index 0 and 6.
+            //The first occurrence is at index 0, so we return 0.
+            ///     
+            // Input: haystack = "leetcode", needle = "leeto"
+            //Output: -1
+            //Explanation: "leeto" did not occur in "leetcode", so we return -1.
+            if (string.IsNullOrEmpty(needle)) return 0;
+            int needleLen = needle.Length;
+            int len = haystack.Length + 1 - needle.Length;
+            for (int i = 0; i < len; i++)
+            {
+                if (haystack.Substring(i, needleLen) == needle) return i;
+            }
+            return -1;
+        }
+        public static IList<string> LetterCombinations(string digits)
+        {
+
+            // Input: digits = "23"
+            //Output: ["ad","ae","af","bd","be","bf","cd","ce","cf"]
+            if (digits.Length == 0) return new List<string>();
+            var dic = CreateDictionary();
+            var rs = LetterCombinations(0, dic, digits);
+            return rs;
+        }
+        private static List<string> LetterCombinations(int index, Dictionary<char, List<string>> dic, string digits)
+        {
+            var rs = new List<string>();
+            if (index + 1 == digits.Length)
+            {
+                return dic[digits[index]];
+            }
+            for (int i = 0; i < dic[digits[index]].Count; i++)
+            {
+                var firstPart = dic[digits[index]][i];
+                var rs0 = LetterCombinations(index + 1, dic, digits);
+                for (int j = 0; j < rs0.Count; j++)
+                {
+                    rs.Add(firstPart + rs0[j]);
+                }
+            }
+            return rs;
+        }
+        private static Dictionary<char, List<string>> CreateDictionary()
+        {
+            var rs = new Dictionary<char, List<string>>();
+            rs.Add('2', new List<string> { "a", "b", "c" });
+            rs.Add('3', new List<string> { "d", "e", "f" });
+            rs.Add('4', new List<string> { "g", "h", "i" });
+            rs.Add('5', new List<string> { "j", "k", "l" });
+            rs.Add('6', new List<string> { "m", "n", "o" });
+            rs.Add('7', new List<string> { "p", "q", "r", "s" });
+            rs.Add('8', new List<string> { "t", "u", "v" });
+            rs.Add('9', new List<string> { "w", "x", "y", "z" });
+            return rs;
+        }
+        public static int[] ConvertNumberToInt( ){
+            int digit = 8;
+            int remainder = 0;
+            string result = string.Empty;
+            /// DECIMAL TO Binary conversion
+            while (digit > 0)
+            {
+                remainder = digit % 2;
+                digit = digit / 2;
+                result = remainder.ToString() + result;
+            }
+            Console.WriteLine(result);
+            //converting the int to int[]
+            var arr = result.ToString().ToCharArray().Select(x => (int)Char.GetNumericValue(x)).ToArray();
+
+            for (int i = 0; i < arr.Length; i++)
+            {
+                Console.WriteLine(arr[i]);
+            }
+            return arr;
+    }
+
+        public static int BinaryGapFindingZeroes(int n)
+        {
+            // Finding the Gap between zeroe's and boundary is one.
+            ///110001001 => 3
+            ///0001 => 0
+            ///1000 =>0
+            var binary = ConvertDecimalToBinary(n);
+            int isOne = 0;
+            int countZero = 0;
+            int maxZero = 0;
+            for (int i = 0; i < binary.Length; i++)
+            {
+                if (binary[i] == '0' && isOne == 1)
+                {
+                    countZero++;
+                }
+                else if (binary[i] == '1')
+                {
+                    isOne = 1;
+                    maxZero = Math.Max(maxZero, countZero);
+                    countZero = 0;
+                }
+ 
+            }
+
+            return maxZero;
+        }
+
+
+        public static  string ConvertDecimalToBinary(int digit)
+        {
+            int remainder = 0;
+            string result = string.Empty;
+            while (digit > 0)
+            {
+                remainder = digit % 2;
+                digit = digit / 2;
+                result = remainder.ToString() + result;
+            }
+            return result;
+        }
+
+
 
     }
+}
+
+public class Backtracking
+{
+    IList<string> result = new List<string>();
+    public IList<string> LetterCombinations(string digits)
+    {
+
+    //Input: digits = "23"
+//Output: ["ad","ae","af","bd","be","bf","cd","ce","cf"]
+
+        if (string.IsNullOrWhiteSpace(digits))
+        {
+            return result;
+        }
+        else
+        {
+            IDictionary<int, IList<char>> map = new Dictionary<int, IList<char>>();
+            map.Add(2, new List<char> { 'a', 'b', 'c' });
+            map.Add(3, new List<char> { 'd', 'e', 'f' });
+            map.Add(4, new List<char> { 'g', 'h', 'i' });
+            map.Add(5, new List<char> { 'j', 'k', 'l' });
+            map.Add(6, new List<char> { 'm', 'n', 'o' });
+            map.Add(7, new List<char> { 'p', 'q', 'r', 's' });
+            map.Add(8, new List<char> { 't', 'u', 'v' });
+            map.Add(9, new List<char> { 'w', 'x', 'y', 'z' });
+
+            int num = Convert.ToInt32(digits);
+
+            GenerateCombinations(num, "", map);
+        }
+
+        return result;
+    }
+
+
+    public void GenerateCombinations(int digits, string output, IDictionary<int, IList<char>> map)
+    {
+        if (digits == 0)
+        {
+            result.Add(output);
+            return;
+        }
+        else
+        {
+            int num = digits % 10;
+            digits = digits / 10;
+
+            for (int i = 0; i < map[num].Count(); i++)
+            {
+                GenerateCombinations(digits, map[num][i].ToString() + output, map);
+            }
+        }
+    }
+}
+
+
+
+public class MyConstructor
+{
+    public string Name { get; set; }
+    public List<string> Email { get; set; }
+    public string Password { get; set; }
+
+    public MyConstructor(string name)
+    {
+        Name = name;
+    }
+
+    public MyConstructor(string name,List<string> email ,string password) : this(name)
+    {
+        Email = email;
+        Password = password;
+    }
+}
+
+
+public class MyTest
+{
+    public int[]  Test() {
+        var num =   Newtest();
+        return num;
+    }
+
+    public int[] Newtest()
+    {
+        return new int[] { 1, 2 };
+    }
+
 }

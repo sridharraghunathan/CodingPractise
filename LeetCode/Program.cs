@@ -7,7 +7,9 @@ using System.Text;
 
 
 var arrayOfRecurring = new int[] { 1, 2, 3, 4, 2, 5, 6 ,3};
-arrayOfRecurring.ToList().Take(1);
+//arrayOfRecurring.ToList().Take(1);
+
+//LeetCodeClass.MoveZeroes(new int[] { 1,1,0, 1, 0, 3 });
 //var temp3 = new string[] { "h1i", "hello" };
 //var temp4 = new string[] { "hi", "how", "Are", "you" };
 //LeetCodeClass.LengthOfLongestSubstring("daba");
@@ -352,14 +354,63 @@ int[] left = new int[] { 1, 2, 3, 4 };
 int[] right = new int[] { 5, 6, 7, 8 };
 
 Print(LeetCodeClass.merge(left , right));
- */
+ 
 
 
 var res = LeetCodeClass.MergeSortM(arrayOfRecurring);
 //var res =  MergeSort.mergeSort(arrayOfRecurring);
-Print(res);
+//var res = LeetCodeClass.RotateArrayKTimes(arrayOfRecurring,1);
+Console.WriteLine(string.Join(',', res));
 
 
+
+var input1 = int.Parse(Console.ReadLine()); 
+var input2 = int.Parse(Console.ReadLine());
+int[,] array = new int[input1 , input2];
+
+for (int i = 0; i < array.GetLength(0); i++)
+{
+    for ( int j = 0; j < array.GetLength(1); j++)
+    {
+        Console.WriteLine($"Position of {i}{j}");
+        array[i, j] = int.Parse(Console.ReadLine());
+    }
+}
+
+
+var myCon = new MyConstructor("sridhar",new List<string>() { "sridhar.gmail", "sridhar.gmail1" },"1234");
+var n = new List<MyConstructor>();
+n.Add(myCon);
+
+//int[] nums = new int[] { 1, 2, 4, 2, 5, 7, 2, 4, 9, 0, 9 };
+
+//var l = LeetCodeClass.ThreeSumV1(nums);
+
+
+
+//var l = LeetCodeClass.MaxProfit(nums
+ 
+
+int[][] grid2 = new int[][]
+{
+    new int[] {1,2,3},
+      new int[] { 4, 5, 6  },
+      new int[] {7,8,9}
+
+};
+
+LeetCodeClass.StrStr("leetcode", "leeto");
+LeetCodeClass.Rotate(grid2);
+LeetCodeClass.LetterCombinations("23");
+new Backtracking().LetterCombinations("92");
+Print (new MyTest().Test());
+ */
+
+//LeetCodeClass.BinaryGapFindingZeroes(9);
+
+
+
+Console.WriteLine(LeetCodeClass.BinaryGapFindingZeroes(20));
 void Print(int[] arr)
 {
     foreach( var item in arr)
