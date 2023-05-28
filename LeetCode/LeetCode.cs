@@ -1503,6 +1503,27 @@ Note that buying on day 2 and selling on day 1 is not allowed because you must b
 
             return minDifference;
         }
+
+        public static int FrogJumpBasedonLeaves(int[] arr, int target)
+        {
+
+            var dict = new Dictionary<int, int>();
+
+
+            for (int i = 0; i < arr.Length; i++)
+            {
+                if (!dict.ContainsValue(arr[i]))
+                {
+                    dict.Add(i, arr[i]);
+                    if (dict.Count == target && dict.ContainsValue(target))
+                    {
+                        return i;
+                    }
+                }
+            }
+
+            return -1;
+        }
     }
 }
 
