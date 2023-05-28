@@ -404,13 +404,15 @@ LeetCodeClass.Rotate(grid2);
 LeetCodeClass.LetterCombinations("23");
 new Backtracking().LetterCombinations("92");
 Print (new MyTest().Test());
+//LeetCodeClass.BinaryGapFindingZeroes(9);
+Console.WriteLine(LeetCodeClass.BinaryGapFindingZeroes(20));
  */
 
-//LeetCodeClass.BinaryGapFindingZeroes(9);
 
 
 
-Console.WriteLine(LeetCodeClass.BinaryGapFindingZeroes(20));
+
+Console.WriteLine(LeetCodeClass.OddOccurenceString(new int[] { 9,3,9,3,9,7,9}));
 void Print(int[] arr)
 {
     foreach( var item in arr)

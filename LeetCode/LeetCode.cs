@@ -1385,7 +1385,6 @@ Note that buying on day 2 and selling on day 1 is not allowed because you must b
             }
             return arr;
     }
-
         public static int BinaryGapFindingZeroes(int n)
         {
             // Finding the Gap between zeroe's and boundary is one.
@@ -1413,8 +1412,6 @@ Note that buying on day 2 and selling on day 1 is not allowed because you must b
 
             return maxZero;
         }
-
-
         public static  string ConvertDecimalToBinary(int digit)
         {
             int remainder = 0;
@@ -1428,8 +1425,84 @@ Note that buying on day 2 and selling on day 1 is not allowed because you must b
             return result;
         }
 
+        public static int OddOccurenceString(int[] array)
+        {
+            // Finding the element which is not paired 1,2,2,1,3,4,3 here 4 has no pair
+            /// First sort the element check current and next element.
 
+            Array.Sort(array);
+            int oddElement = 0;
+            int i = 0, len = array.Length;
+           while ( i < len) {
+                if (i + 1 < len)
+                {
 
+                    if (array[i] != array[i + 1])
+                    {
+                        oddElement = array[i];
+                        break;
+                    }
+
+                    i = i + 2;
+                }
+                else return array[i];
+            }
+            return oddElement;
+        }
+
+        public static int FrogJump()
+        {
+            /// Another Approach 
+            ///  Math .Ceil( end - start / distance );
+
+            int start = 10, end = 85, distance = 30, count = 0;
+
+            for (int i = start; i <= end;)
+            {
+
+                count++;
+                i = i + distance;
+            }
+
+            return count;
+        }
+
+        public static int MissingElement(int[] arr)
+        {
+            Array.Sort(arr);
+            int length = arr.Length;
+            int missing = -1;
+            if (length + 1 != arr[length - 1]) return length + 1;
+
+            for (int i = 0; i < length; i++)
+            {
+                if (arr[i] != i + 1)
+                {
+                    missing = i + 1; break;
+                }
+            }
+            return missing;
+        }
+
+        public static int TapeEquilibrium()
+        {
+            int[] arr = { 3, 1, 2, 4, 3 };
+
+            int total = arr.Sum(el => el);
+            int minDifference = Int32.MaxValue; int left = 0, right;
+            int currentDifference = -1;
+            for (int i = 0; i < arr.Length; i++)
+            {
+                left += arr[i];
+                right = total - left;
+                currentDifference = Math.Abs(left - right);
+                minDifference = Math.Min(currentDifference, minDifference);
+            }
+            
+            Console.WriteLine(minDifference);
+
+            return minDifference;
+        }
     }
 }
 
