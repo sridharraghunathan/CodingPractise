@@ -1424,7 +1424,6 @@ Note that buying on day 2 and selling on day 1 is not allowed because you must b
             }
             return result;
         }
-
         public static int OddOccurenceString(int[] array)
         {
             // Finding the element which is not paired 1,2,2,1,3,4,3 here 4 has no pair
@@ -1449,7 +1448,6 @@ Note that buying on day 2 and selling on day 1 is not allowed because you must b
             }
             return oddElement;
         }
-
         public static int FrogJump()
         {
             /// Another Approach 
@@ -1466,7 +1464,6 @@ Note that buying on day 2 and selling on day 1 is not allowed because you must b
 
             return count;
         }
-
         public static int MissingElement(int[] arr)
         {
             Array.Sort(arr);
@@ -1483,7 +1480,6 @@ Note that buying on day 2 and selling on day 1 is not allowed because you must b
             }
             return missing;
         }
-
         public static int TapeEquilibrium()
         {
             int[] arr = { 3, 1, 2, 4, 3 };
@@ -1503,7 +1499,6 @@ Note that buying on day 2 and selling on day 1 is not allowed because you must b
 
             return minDifference;
         }
-
         public static int FrogJumpBasedonLeaves(int[] arr, int target)
         {
 
@@ -1525,6 +1520,39 @@ Note that buying on day 2 and selling on day 1 is not allowed because you must b
             return -1;
         }
 
+        public static int[] MaxCounter(int[] arr, int N)
+        {
+
+            //Declare an Dictionary with Empty value for all the data
+            var dict = new Dictionary<int, int>();
+            for (int i = 1; i <= N; i++)
+            {
+                dict.Add(i, 0);
+            }
+
+            //Loop all the element and increment the dictionary value by one
+            for (int i = 0; i < arr.Length; i++)
+            {
+                if (arr[i] < N)
+                {
+                    dict[arr[i]]++;
+                    //Console.WriteLine(dict[3]);
+                }
+                else if (arr[i] > N)
+                {
+                    // First we need to Loop all the elements and then check and increment all the element by max of the dict value.
+                    int max = dict.Max(item => item.Value);
+                    int j = 1;
+                    while (j <= dict.Keys.Count)
+                    {
+                        dict[j] = Math.Max(dict[j], max);
+                        j++;
+                    }
+                }
+            }
+            var arrNew = dict.Values.ToArray();
+            return arrNew;
+        }
 
 
     }
