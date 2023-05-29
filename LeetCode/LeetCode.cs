@@ -1484,7 +1484,13 @@ Note that buying on day 2 and selling on day 1 is not allowed because you must b
         {
             ///Codelity Problem
             ///https://github.com/jonasraoni/codility/blob/master/Lesson%204%20-%20Counting%20Elements/PermCheck.md
+      /*      For example, consider array A such that:
 
+A[0] = 3 A[1] = 1 A[2] = 2 A[3] = 4 A[4] = 3 We can split this tape in four places:
+
+P = 1, difference = | 3 − 10 | = 7 P = 2, difference = | 4 − 9 | = 5 P = 3, difference = | 6 − 7 | = 1 P = 4, difference = | 10 − 3 | = 7
+      Expected output is 1
+       */
             int[] arr = { 3, 1, 2, 4, 3 };
 
             int total = arr.Sum(el => el);
@@ -1505,7 +1511,12 @@ Note that buying on day 2 and selling on day 1 is not allowed because you must b
         public static int FrogJumpBasedonLeaves(int[] arr, int target)
         {
             ///Codelity Problem 
-            var dict = new Dictionary<int, int>();
+            ///For example, you are given integer X = 5 and array A such that:
+
+            /// A[0] = 1 A[1] = 3 A[2] = 1 A[3] = 4 A[4] = 2 A[5] = 3 A[6] = 5 A[7] = 4 In second 6, a leaf falls into position 5.
+                ///This is the earliest time when leaves appear in every position across the river.
+
+                        var dict = new Dictionary<int, int>();
             for (int i = 0; i < arr.Length; i++)
             {
                 if (!dict.ContainsValue(arr[i]))
@@ -1522,6 +1533,15 @@ Note that buying on day 2 and selling on day 1 is not allowed because you must b
         }
         public static int[] MaxCounter(int[] arr, int N)
         {
+            ///Codelity Problem 3,4,4,6,1,4,4
+            ///Here the target = 5 since the max element so any element gt we need to increase the counter to Max;
+            ///(0, 0, 1, 0, 0)
+           /// (0, 0, 1, 1, 0)
+            ///(0, 0, 1, 2, 0)
+            ///(2, 2, 2, 2, 2)
+            ///(3, 2, 2, 2, 2)
+            ///(3, 2, 2, 3, 2)
+            ///(3, 2, 2, 4, 2)
             //Declare an Dictionary with Empty value for all the data
             var dict = new Dictionary<int, int>();
             for (int i = 1; i <= N; i++)
@@ -1556,6 +1576,7 @@ Note that buying on day 2 and selling on day 1 is not allowed because you must b
         {
          ///1,2,3 missing number 4 
          ///1,2,4 missing number 3
+         ///all the elements are starts from Positve number from 1,N+1
             var dict = arr.ToDictionary(el => el, el => el);
             for (int i = 1; i <= arr.Length; i++)
             {
@@ -1589,7 +1610,6 @@ Note that buying on day 2 and selling on day 1 is not allowed because you must b
             }
             return actualSum - currentSum;
         }
-
         public static int PermutationCheck(int[] arr)
         {
             ///int[] arr = {4,3,2,1}; is 1 
