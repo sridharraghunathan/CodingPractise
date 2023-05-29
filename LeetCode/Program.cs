@@ -407,6 +407,18 @@ Print (new MyTest().Test());
 //LeetCodeClass.BinaryGapFindingZeroes(9);
 Console.WriteLine(LeetCodeClass.BinaryGapFindingZeroes(20));
 Console.WriteLine(LeetCodeClass.OddOccurenceString(new int[] { 9,3,9,3,9,7,9}));
+
+IEnumerable<string> strArray = new string[] { "name", "Fred", "colour", "green", "sport", "tennis" };
+
+
+            var even = strArray.ToList().Where((c, i) => (i % 2 == 0)).ToList();
+            var odd = strArray.ToList().Where((c, i) => (i % 2 != 0)).ToList();
+Dictionary<string, string> dict = even.ToDictionary(x => x, x => odd[even.IndexOf(x)]);
+  foreach( var item in even.IndexOf(0)){
+    Console.WriteLine(item);
+  }
+  */
+  }
  */
 
 Print(LeetCodeClass.MaxCounter(new int[] { 3, 4, 4, 6, 1, 4, 4 }, 5));
