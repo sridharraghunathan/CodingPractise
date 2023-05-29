@@ -1482,6 +1482,9 @@ Note that buying on day 2 and selling on day 1 is not allowed because you must b
         }
         public static int TapeEquilibrium()
         {
+            ///Codelity Problem
+            ///https://github.com/jonasraoni/codility/blob/master/Lesson%204%20-%20Counting%20Elements/PermCheck.md
+
             int[] arr = { 3, 1, 2, 4, 3 };
 
             int total = arr.Sum(el => el);
@@ -1501,10 +1504,8 @@ Note that buying on day 2 and selling on day 1 is not allowed because you must b
         }
         public static int FrogJumpBasedonLeaves(int[] arr, int target)
         {
-
+            ///Codelity Problem 
             var dict = new Dictionary<int, int>();
-
-
             for (int i = 0; i < arr.Length; i++)
             {
                 if (!dict.ContainsValue(arr[i]))
@@ -1551,9 +1552,10 @@ Note that buying on day 2 and selling on day 1 is not allowed because you must b
             var arrNew = dict.Values.ToArray();
             return arrNew;
         }
-
         public static int FindMissingPostiveNumber(int[] arr)
         {
+         ///1,2,3 missing number 4 
+         ///1,2,4 missing number 3
             var dict = arr.ToDictionary(el => el, el => el);
             for (int i = 1; i <= arr.Length; i++)
             {
@@ -1564,7 +1566,6 @@ Note that buying on day 2 and selling on day 1 is not allowed because you must b
             }
             return arr[arr.Length - 1] + 1;
         }
-
         public static void ReverseWithCharArray()
         {
             string str = "sridhar";
@@ -1577,10 +1578,9 @@ Note that buying on day 2 and selling on day 1 is not allowed because you must b
 
             Console.WriteLine(new String(ch));
         }
-
         public static int FindMissingElementArithmeticProgression(int[] arr)
         {
-
+            /// Element is 1 ... N+ 1 THEN Formula calculate the sum of the element and actual sum
             int currentSum = arr.Sum();
             int actualSum = 0;
             for (int i = 1; i <= arr.Length + 1; i++)
@@ -1588,6 +1588,22 @@ Note that buying on day 2 and selling on day 1 is not allowed because you must b
                 actualSum += i;
             }
             return actualSum - currentSum;
+        }
+
+        public static int PermutationCheck(int[] arr)
+        {
+            ///int[] arr = {4,3,2,1}; is 1 
+            ///int[] arr = {4,3,3,1}; is  0 because the 2 is missing
+            ///we should not have repetitions
+            int max = arr.Max();
+            for (int i = 1; i <= max; i++)
+            {
+                if (!arr.Contains(i))
+                {
+                    return 0;
+                }
+            }
+            return 1;
         }
     }
 }
@@ -1599,7 +1615,7 @@ public class Backtracking
     {
 
     //Input: digits = "23"
-//Output: ["ad","ae","af","bd","be","bf","cd","ce","cf"]
+  //Output: ["ad","ae","af","bd","be","bf","cd","ce","cf"]
 
         if (string.IsNullOrWhiteSpace(digits))
         {
@@ -1607,6 +1623,8 @@ public class Backtracking
         }
         else
         {
+            // this is Mobile Number Combination
+            // 2 will have a b c
             IDictionary<int, IList<char>> map = new Dictionary<int, IList<char>>();
             map.Add(2, new List<char> { 'a', 'b', 'c' });
             map.Add(3, new List<char> { 'd', 'e', 'f' });
@@ -1645,9 +1663,6 @@ public class Backtracking
         }
     }
 }
-
-
-
 public class MyConstructor
 {
     public string Name { get; set; }
@@ -1665,8 +1680,6 @@ public class MyConstructor
         Password = password;
     }
 }
-
-
 public class MyTest
 {
     public int[]  Test() {
