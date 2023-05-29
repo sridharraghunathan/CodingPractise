@@ -1519,10 +1519,8 @@ Note that buying on day 2 and selling on day 1 is not allowed because you must b
 
             return -1;
         }
-
         public static int[] MaxCounter(int[] arr, int N)
         {
-
             //Declare an Dictionary with Empty value for all the data
             var dict = new Dictionary<int, int>();
             for (int i = 1; i <= N; i++)
@@ -1554,7 +1552,43 @@ Note that buying on day 2 and selling on day 1 is not allowed because you must b
             return arrNew;
         }
 
+        public static int FindMissingPostiveNumber(int[] arr)
+        {
+            var dict = arr.ToDictionary(el => el, el => el);
+            for (int i = 1; i <= arr.Length; i++)
+            {
+                if (!dict.ContainsKey(i))
+                {
+                    return i;
+                }
+            }
+            return arr[arr.Length - 1] + 1;
+        }
 
+        public static void ReverseWithCharArray()
+        {
+            string str = "sridhar";
+            char[] ch = str.ToCharArray();
+
+            for (int i = 0, j = ch.Length - 1; i < j; i++, j--)
+            {
+                (ch[i], ch[j]) = (ch[j], ch[i]); // Because we Tuple we dont need extra element
+            }
+
+            Console.WriteLine(new String(ch));
+        }
+
+        public static int FindMissingElementArithmeticProgression(int[] arr)
+        {
+
+            int currentSum = arr.Sum();
+            int actualSum = 0;
+            for (int i = 1; i <= arr.Length + 1; i++)
+            {
+                actualSum += i;
+            }
+            return actualSum - currentSum;
+        }
     }
 }
 
