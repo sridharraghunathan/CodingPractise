@@ -122,7 +122,7 @@ foreach ( var value  in newDict.Values)
 
 //LeetCodeSolution.PersonDataTuple();
 //LeetCodeSolution.bubbleSort(arrayOfRecurring);
-
+//Range Operators
 var array = new int[] { 1, 2, 3, 4, 5,6 };
 var slice1 = array[2..^3];    // array[new Range(2, new Index(3, fromEnd: true))]
 var slice2 = array[..^3];     // array[Range.EndAt(new Index(3, fromEnd: true))]
@@ -417,11 +417,18 @@ Dictionary<string, string> dict = even.ToDictionary(x => x, x => odd[even.IndexO
   foreach( var item in even.IndexOf(0)){
     Console.WriteLine(item);
   }
-  */
+ 
   }
+Print(LeetCodeClass.MaxCounter(new int[] { 3, 4, 4, 6, 1, 4, 4 }, 5));
  */
 
-Print(LeetCodeClass.MaxCounter(new int[] { 3, 4, 4, 6, 1, 4, 4 }, 5));
+
+var array = new int[] { 1, 2, 3, 4, 5, 6 };
+var slice1 = array[0..4];
+Print(slice1);
+
+
+
 void Print(int[] arr)
 {
     foreach( var item in arr)
@@ -429,3 +436,4 @@ void Print(int[] arr)
         Console.WriteLine(item);
     }
 }
+

@@ -1663,6 +1663,42 @@ public class Backtracking
         return result;
     }
 
+    public static List<int> ComputeGenomicRangeQuery(string inputString, int[] p, int[] q)
+    {
+        /*
+    string inputString = "cagccta";
+        int[] p = {2,5,0}; start boundary 
+        int[] q = {4,5,6}; end boundary
+        between p and q take those element and find the minimum impact and store in list
+        Impact Number A = 1 C= 2 G = 3 T= 4
+
+        */
+        //Convert the inputstring to Number
+        var convertToImpactedNumber = new List<int>();
+        inputString = inputString.ToLower();
+        var stringCount = inputString.Count();
+
+        var result = new List<int>();
+        for (int i = 0; i < stringCount; i++)
+        {
+            if (inputString[i] == 'a')
+                convertToImpactedNumber.Add(1);
+            else if (inputString[i] == 'c')
+                convertToImpactedNumber.Add(2);
+            else if (inputString[i] == 'g')
+                convertToImpactedNumber.Add(3);
+            else if (inputString[i] == 't')
+                convertToImpactedNumber.Add(4);
+        }
+
+        for (int i = 0; i < p.Length; i++)
+        {
+            var n = convertToImpactedNumber.Skip(p[i]).Take(q[i] - p[i] == 0 ? 1 : q[i] - p[i]).ToArray().Min();
+            result.Add(n);
+        }
+
+        return result;
+    }
 
     public void GenerateCombinations(int digits, string output, IDictionary<int, IList<char>> map)
     {
