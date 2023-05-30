@@ -422,9 +422,9 @@ Dictionary<string, string> dict = even.ToDictionary(x => x, x => odd[even.IndexO
 Print(LeetCodeClass.MaxCounter(new int[] { 3, 4, 4, 6, 1, 4, 4 }, 5));
  */
 
-
+//Ranger Operator
 var array = new int[] { 1, 2, 3, 4, 5, 6 };
-var slice1 = array[0..4];
+var slice1 = array[0..4]; /// index ,length
 Print(slice1);
 
 
