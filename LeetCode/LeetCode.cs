@@ -1677,18 +1677,31 @@ public class Backtracking
         var convertToImpactedNumber = new List<int>();
         inputString = inputString.ToLower();
         var stringCount = inputString.Count();
+        var dict = new Dictionary<char, int>(){
+        {'a',1},
+        {'c',2},
+        {'g',3},
+        {'t',4}
+      };
 
         var result = new List<int>();
         for (int i = 0; i < stringCount; i++)
         {
-            if (inputString[i] == 'a')
-                convertToImpactedNumber.Add(1);
-            else if (inputString[i] == 'c')
-                convertToImpactedNumber.Add(2);
-            else if (inputString[i] == 'g')
-                convertToImpactedNumber.Add(3);
-            else if (inputString[i] == 't')
-                convertToImpactedNumber.Add(4);
+            //Using Dictionary to get the value 
+            if (dict.TryGetValue(inputString[i], out int val))
+            {
+                convertToImpactedNumber.Add(val);
+            }
+            /*
+            if ( inputString[i] == 'a')
+              convertToImpactedNumber.Add(1);
+            else if ( inputString[i] == 'c')
+              convertToImpactedNumber.Add(2);
+            else if ( inputString[i] == 'g')
+              convertToImpactedNumber.Add(3);
+            else if ( inputString[i] == 't')
+              convertToImpactedNumber.Add(4);
+              */
         }
 
         for (int i = 0; i < p.Length; i++)
