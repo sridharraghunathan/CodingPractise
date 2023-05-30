@@ -1731,6 +1731,33 @@ public class Backtracking
             }
         }
     }
+
+
+    public static int AverageSlice()
+    {
+        int[] arr = { 4, 2, 2, 5, 1, 8 };
+        Dictionary<int, double> dict = new Dictionary<int, double>();
+        int len = arr.Length - 1;
+        for (int i = 0; i < len; i++)
+        {
+
+            List<double> temp = new List<double>();
+
+            for (int j = 0; j < len - i; j++)
+            {
+
+                temp.Add(arr.Skip(i).Take(j + 2).Average());
+                //  Console.WriteLine(String.Join(",",arr.Skip(i).Take(j+2)));
+                //Console.WriteLine(String.Join(",", temp));
+            }
+            dict[i] = temp.Min();
+        }
+
+
+        return dict.Where(item => item.Value == dict.Min(el => el.Value)).FirstOrDefault().Key;
+    }
+
+
 }
 public class MyConstructor
 {
