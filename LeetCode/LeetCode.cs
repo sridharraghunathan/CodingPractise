@@ -29,7 +29,7 @@ namespace LeetCode
                     if (grid[i][j] == '0')
                     {
                         var status = MarkVisitedIslandByAllDirection(grid, i, j);
-                       // Console.WriteLine($"{i} {j} {status}");
+                        Console.WriteLine($"{i} {j} {status}");
                         totalClosedIsland = status ? totalClosedIsland+1 : 0 ;
    
                     }
@@ -1385,6 +1385,57 @@ Note that buying on day 2 and selling on day 1 is not allowed because you must b
             }
             return arr;
     }
+        public static void ReverseWithCharArray()
+        {
+            string str = "sridhar";
+            char[] ch = str.ToCharArray();
+
+            for (int i = 0, j = ch.Length - 1; i < j; i++, j--)
+            {
+                (ch[i], ch[j]) = (ch[j], ch[i]); // Because we Tuple we dont need extra element
+            }
+
+            Console.WriteLine(new String(ch));
+        }
+        public static void DivisionTest1()
+        {
+            int maxDiscountPercent = 30;
+            int markupPercent = 20;
+            Single niceFactor = 30;
+            double discount = maxDiscountPercent * (markupPercent / niceFactor);
+            Console.WriteLine("Discount (double): ${0:R}", discount);
+        }
+        public static void DivisionTest2()
+        {
+            int maxDiscountPercent = 30;
+            float markupPercent = 20;
+            float niceFactor = 30f;
+            double discount = maxDiscountPercent * (markupPercent / niceFactor);
+            Console.WriteLine("Discount (int): ${0}", discount);
+        }
+        public static int test(int[] A)
+        {
+
+            var dict = new Dictionary<int, int>();
+            for (int i = 0; i < A.Length; i++)
+            {
+                if (!dict.ContainsKey(A[i]))
+                {
+                    dict.Add(A[i], 1);
+                }
+                else dict[A[i]]++;
+            }
+
+            for (int i = 1; i <= A.Length; i++)
+            {
+                if (dict.ContainsKey(i)) { }
+                else return i;
+            }
+
+            return A.Length + 1;
+        }
+
+        /// CODELITY PROBLEMS
         public static int BinaryGapFindingZeroes(int n)
         {
             // Finding the Gap between zeroe's and boundary is one.
@@ -1466,9 +1517,13 @@ Note that buying on day 2 and selling on day 1 is not allowed because you must b
         }
         public static int MissingElement(int[] arr)
         {
+            //Checking based on INdex
             Array.Sort(arr);
             int length = arr.Length;
             int missing = -1;
+            if (length == 0) return 1;
+            else if (length == 1) return arr[length - 1] + 1;
+
             if (length + 1 != arr[length - 1]) return length + 1;
 
             for (int i = 0; i < length; i++)
@@ -1479,6 +1534,19 @@ Note that buying on day 2 and selling on day 1 is not allowed because you must b
                 }
             }
             return missing;
+        }
+
+        public static int FindMissingElementArithmeticProgression(int[] arr)
+        {
+            ///SAME AS ABOVE
+            /// Element is 1 ... N+ 1 THEN Formula calculate the sum of the element and actual sum
+            int currentSum = arr.Sum();
+            int actualSum = 0;
+            for (int i = 1; i <= arr.Length + 1; i++)
+            {
+                actualSum += i;
+            }
+            return actualSum - currentSum;
         }
         public static int TapeEquilibrium()
         {
@@ -1516,7 +1584,7 @@ P = 1, difference = | 3 − 10 | = 7 P = 2, difference = | 4 − 9 | = 5 P = 3, 
             /// A[0] = 1 A[1] = 3 A[2] = 1 A[3] = 4 A[4] = 2 A[5] = 3 A[6] = 5 A[7] = 4 In second 6, a leaf falls into position 5.
                 ///This is the earliest time when leaves appear in every position across the river.
 
-                        var dict = new Dictionary<int, int>();
+             var dict = new Dictionary<int, int>();
             for (int i = 0; i < arr.Length; i++)
             {
                 if (!dict.ContainsValue(arr[i]))
@@ -1552,7 +1620,7 @@ P = 1, difference = | 3 − 10 | = 7 P = 2, difference = | 4 − 9 | = 5 P = 3, 
             //Loop all the element and increment the dictionary value by one
             for (int i = 0; i < arr.Length; i++)
             {
-                if (arr[i] < N)
+                if (arr[i] <= N)
                 {
                     dict[arr[i]]++;
                     //Console.WriteLine(dict[3]);
@@ -1572,7 +1640,7 @@ P = 1, difference = | 3 − 10 | = 7 P = 2, difference = | 4 − 9 | = 5 P = 3, 
             var arrNew = dict.Values.ToArray();
             return arrNew;
         }
-        public static int FindMissingPostiveNumber(int[] arr)
+        public static int FindMissingPostiveNumberMinimum(int[] arr)
         {
          ///1,2,3 missing number 4 
          ///1,2,4 missing number 3
@@ -1586,30 +1654,7 @@ P = 1, difference = | 3 − 10 | = 7 P = 2, difference = | 4 − 9 | = 5 P = 3, 
                 }
             }
             return arr[arr.Length - 1] + 1;
-        }
-        public static void ReverseWithCharArray()
-        {
-            string str = "sridhar";
-            char[] ch = str.ToCharArray();
-
-            for (int i = 0, j = ch.Length - 1; i < j; i++, j--)
-            {
-                (ch[i], ch[j]) = (ch[j], ch[i]); // Because we Tuple we dont need extra element
-            }
-
-            Console.WriteLine(new String(ch));
-        }
-        public static int FindMissingElementArithmeticProgression(int[] arr)
-        {
-            /// Element is 1 ... N+ 1 THEN Formula calculate the sum of the element and actual sum
-            int currentSum = arr.Sum();
-            int actualSum = 0;
-            for (int i = 1; i <= arr.Length + 1; i++)
-            {
-                actualSum += i;
-            }
-            return actualSum - currentSum;
-        }
+        }         
         public static int PermutationCheck(int[] arr)
         {
             ///int[] arr = {4,3,2,1}; is 1 
@@ -1624,6 +1669,279 @@ P = 1, difference = | 3 − 10 | = 7 P = 2, difference = | 4 − 9 | = 5 P = 3, 
                 }
             }
             return 1;
+        }
+        public static List<int> ComputeGenomicRangeQuery(string inputString, int[] p, int[] q)
+        {
+            /*
+        string inputString = "cagccta";
+            int[] p = {2,5,0}; start boundary 
+            int[] q = {4,5,6}; end boundary
+            between p and q take those element and find the minimum impact and store in list
+            Impact Number A = 1 C= 2 G = 3 T= 4
+
+            */
+            //Convert the inputstring to Number
+            var convertToImpactedNumber = new List<int>();
+            inputString = inputString.ToLower();
+            var stringCount = inputString.Count();
+            var dict = new Dictionary<char, int>(){
+        {'a',1},
+        {'c',2},
+        {'g',3},
+        {'t',4}
+      };
+
+            var result = new List<int>();
+            for (int i = 0; i < stringCount; i++)
+            {
+                //Using Dictionary to get the value 
+                if (dict.TryGetValue(inputString[i], out int val))
+                {
+                    convertToImpactedNumber.Add(val);
+                }
+                /*
+                if ( inputString[i] == 'a')
+                  convertToImpactedNumber.Add(1);
+                else if ( inputString[i] == 'c')
+                  convertToImpactedNumber.Add(2);
+                else if ( inputString[i] == 'g')
+                  convertToImpactedNumber.Add(3);
+                else if ( inputString[i] == 't')
+                  convertToImpactedNumber.Add(4);
+                  */
+            }
+
+            for (int i = 0; i < p.Length; i++)
+            {
+                var n = convertToImpactedNumber.Skip(p[i]).Take(q[i] - p[i] == 0 ? 1 : q[i] - p[i]).Min();
+                result.Add(n);
+            }
+
+            return result;
+        }
+        public static int AverageSlice()
+        {
+            int[] arr = { 4, 2, 2, 5, 1, 8 };
+            Dictionary<int, double> dict = new Dictionary<int, double>();
+            int len = arr.Length - 1;
+            for (int i = 0; i < len; i++)
+            {
+
+                List<double> temp = new List<double>();
+
+                for (int j = 0; j < len - i; j++)
+                {
+
+                    temp.Add(arr.Skip(i).Take(j + 2).Average());
+                    //  Console.WriteLine(String.Join(",",arr.Skip(i).Take(j+2)));
+                    //Console.WriteLine(String.Join(",", temp));
+                }
+                dict[i] = temp.Min();
+            }
+
+            var t = dict.OrderBy(item => item.Value).Take(1).FirstOrDefault().Key;
+            return dict.Where(item => item.Value == dict.Min(el => el.Value)).FirstOrDefault().Key;
+        }
+        public static int PassingCars()
+        {
+            /// Codelity problem 
+            /// we need to take 0 as East Direction travelling cars 
+            /// we need to consider the west direction travelling cars as 1
+            /// increment each east direction car by looping the element
+            /// increment to find total pair of crossing 
+            /// 0 ,1,0,1,1 ==> east 
+            /// <===west
+            /// INDEX  = 0 Can meet Index 1 and Index 2 and Index 3
+            /// Index = 2 can meet Index 3 and Index 4
+            /// 
+
+            int eastDirectionCount = 0;
+            int sumOfPairs = 0;
+            int[] arr = { 0, 1, 0, 1, 1 };
+            for (int i = 0; i < arr.Length; i++)
+            {
+                if (arr[i] == 0) eastDirectionCount++;
+                if (arr[i] == 1) sumOfPairs = sumOfPairs + eastDirectionCount;
+
+            }
+            Console.WriteLine(sumOfPairs);
+            return sumOfPairs;
+        }
+        public static int MaxProductThree(int[] arr)
+        {
+            /// First we need sort the array so the max value will be at last
+            /// if the more than 2 negative value exists in an array then we need to consider those as well.
+            /// -3,-2,1,1,3,5 // last three is 15 considering first two and last 30
+            Array.Sort(arr);
+            int len = arr[arr.Length - 1];
+            int firstPair = arr[0] + arr[1] + arr[len];
+            int secondPair =  arr.TakeLast(3).Sum();
+            int max = Math.Max(firstPair, secondPair);
+            return max;
+        }
+        public static int TriangularTriplet(int[] arr)
+        {
+            //Sort the Elements in Ascending order
+            //Codelity Problem
+            //three value whose condition matches P ,Q,R value in increasing order so R will be always greater
+            // P + Q > R this alone we need to check it
+            // P + R > Q always true
+            // Q + R > P always true
+
+
+            for (int i = 0; i < arr.Length - 2; i++)
+            {
+                if (arr[i] + arr[i + 1] > arr[i + 2])
+                {
+                    Console.WriteLine($"{arr[i]},{arr[i + 1]},{arr[i + 2]}");
+                    return 1;
+                }
+            }
+
+            return 0;
+
+        }
+        public static int FishStream(int[] arr1, int[] arr2)
+        {
+
+            /*  Fish moving towards the DOWNSTREAM WIL BE 1 and opposite will 0 
+            Big fish will eat small fish 
+            we keep stack of the fish moving towards the downstream
+            check against the upstream
+              int[] arr1 = {4,3,2,1,5};
+           int[] arr2 = {0,1,0,0,0};
+            total fish - eat fish = alive fish.
+           */
+            int counter = 0;
+            var ds = new Stack<int>();
+            for (int i = 0; i < arr1.Length; i++)
+            {
+                if (arr2[i] == 1)
+                {
+                    ds.Push(arr1[i]);
+                }
+                else
+                {
+                    while (ds.Any())
+                    {
+                        if (ds.Peek() > arr1[i])
+                        {
+                            counter++;
+                            break;
+                        }
+                        else if (ds.Peek() < arr1[i])
+                        {
+                            counter++;
+                            ds.Pop();
+                        }
+                    }
+                }
+            }
+
+            return arr1.Length - counter;
+        }
+        public static int ParanthesisValidation(string s)
+        {
+
+            //Scenario - 1 (()()) valid  
+            // scenario - 2 (()() not valid opening means increment by 1 and closing decrement by one. usually it will be for ideally if value is non zero or negative then return 0;
+            //scenario - 3 (()))() negative will come
+
+            int counter = 0;
+            for (int i = 0; i < s.Length; i++)
+            {
+
+                if (s[i] == '(') counter++;
+                else if (s[i] == ')') counter--;
+
+                if (counter < 0) return 0;
+
+            }
+
+            if (counter != 0) return 0;
+
+            return 1;
+
+
+
+        }
+        public static int NestedBrackets()
+        {
+            /// {[()]}
+            /// Codelity test
+            var stack = new Stack<int>();
+            string str = "}[()()]}";
+            if (str.Length == 0) return 1;
+            int temp = 0;
+            for (int i = 0; i < str.Length; i++)
+            {
+
+                if (str[i] == '{') temp = +1;
+                else if (str[i] == '}') temp = -1;
+                if (str[i] == '[') temp = +2;
+                if (str[i] == ']') temp = -2;
+                if (str[i] == '(') temp = +3;
+                if (str[i] == ')') temp = -3;
+                //  Console.WriteLine(str[i]);
+                //Console.WriteLine(temp);
+                if (temp < 0 && i == 0) return 0;
+                if (temp < 0 && temp != -stack.Peek()) return 0;
+                else if (temp < 0) stack.Pop();
+                else stack.Push(temp);
+            }
+
+            if (stack.Count == 0) return 1;
+            else return 0;
+
+        }
+        public static int DominatorArray(int[] arr)
+        {
+            ///repetition value 
+            /// 3 should more than half of the araray and need to return index of the value.
+            //int[] arr = { 3, 4, 3, 2, 3, -1, 3, 3 };
+            int returnVal = 0;
+            int[] newArray = arr.OrderBy(item => item).ToArray();
+            int len = newArray.Length;
+            if (len == 0) return -1;
+            if (len == 1) return returnVal;
+            int counter = 0;
+
+            for (int i = 1; i < len; i++)
+            {
+                if (newArray[i] == newArray[i - 1])
+                {
+                    counter++;
+                    Console.WriteLine(counter);
+                }
+                else counter = 1;
+
+                if (counter > (len / 2))
+                {
+                    int val = newArray[i];
+                    returnVal = arr.ElementAt(val);
+                    break;
+                }
+            }
+
+            return returnVal;
+        }
+        public static int StoneWall(int[] H)
+        {
+            int blocks = 1;
+            var stack = new Stack<int>();
+            stack.Push(H[0]);
+            for (var i = 0; ++i < H.Length;)
+            {
+                int height = H[i];
+                while (stack.Count > 0 && stack.Peek() > height) // current stack is greater than existing value remove it 
+                    stack.Pop();
+                if (stack.Count == 0 || stack.Peek() != height) // DECREASING SCENARIO OR 
+                {
+                    stack.Push(height);
+                    ++blocks;
+                }
+            }
+            return blocks;
         }
     }
 }
@@ -1663,55 +1981,6 @@ public class Backtracking
         return result;
     }
 
-    public static List<int> ComputeGenomicRangeQuery(string inputString, int[] p, int[] q)
-    {
-        /*
-    string inputString = "cagccta";
-        int[] p = {2,5,0}; start boundary 
-        int[] q = {4,5,6}; end boundary
-        between p and q take those element and find the minimum impact and store in list
-        Impact Number A = 1 C= 2 G = 3 T= 4
-
-        */
-        //Convert the inputstring to Number
-        var convertToImpactedNumber = new List<int>();
-        inputString = inputString.ToLower();
-        var stringCount = inputString.Count();
-        var dict = new Dictionary<char, int>(){
-        {'a',1},
-        {'c',2},
-        {'g',3},
-        {'t',4}
-      };
-
-        var result = new List<int>();
-        for (int i = 0; i < stringCount; i++)
-        {
-            //Using Dictionary to get the value 
-            if (dict.TryGetValue(inputString[i], out int val))
-            {
-                convertToImpactedNumber.Add(val);
-            }
-            /*
-            if ( inputString[i] == 'a')
-              convertToImpactedNumber.Add(1);
-            else if ( inputString[i] == 'c')
-              convertToImpactedNumber.Add(2);
-            else if ( inputString[i] == 'g')
-              convertToImpactedNumber.Add(3);
-            else if ( inputString[i] == 't')
-              convertToImpactedNumber.Add(4);
-              */
-        }
-
-        for (int i = 0; i < p.Length; i++)
-        {
-            var n = convertToImpactedNumber.Skip(p[i]).Take(q[i] - p[i] == 0 ? 1 : q[i] - p[i]).ToArray().Min();
-            result.Add(n);
-        }
-
-        return result;
-    }
 
     public void GenerateCombinations(int digits, string output, IDictionary<int, IList<char>> map)
     {
@@ -1732,30 +2001,8 @@ public class Backtracking
         }
     }
 
+    
 
-    public static int AverageSlice()
-    {
-        int[] arr = { 4, 2, 2, 5, 1, 8 };
-        Dictionary<int, double> dict = new Dictionary<int, double>();
-        int len = arr.Length - 1;
-        for (int i = 0; i < len; i++)
-        {
-
-            List<double> temp = new List<double>();
-
-            for (int j = 0; j < len - i; j++)
-            {
-
-                temp.Add(arr.Skip(i).Take(j + 2).Average());
-                //  Console.WriteLine(String.Join(",",arr.Skip(i).Take(j+2)));
-                //Console.WriteLine(String.Join(",", temp));
-            }
-            dict[i] = temp.Min();
-        }
-
-
-        return dict.Where(item => item.Value == dict.Min(el => el.Value)).FirstOrDefault().Key;
-    }
 
 
 }
