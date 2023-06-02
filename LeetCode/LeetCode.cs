@@ -1699,6 +1699,7 @@ P = 1, difference = | 3 − 10 | = 7 P = 2, difference = | 4 − 9 | = 5 P = 3, 
                 {
                     convertToImpactedNumber.Add(val);
                 }
+
                 /*
                 if ( inputString[i] == 'a')
                   convertToImpactedNumber.Add(1);
