@@ -436,7 +436,6 @@ LeetCodeClass.StoneWall(arr );
 
 
 
-
 //Take 2 row for each ART 
   Example0000().GroupBy(art => art.Type).
     SelectMany(e => e.OrderByDescending(p => p.Price).Take(2)).ToList() 
