@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace LeetCode
 {
 
-    class gfg //Class Name is case Sensitive and Method Name as well
+    static  class gfg //Class Name is case Sensitive and Method Name as well
     {
      //   private static short value = 1;
         public static void Another1()
@@ -24,7 +24,9 @@ namespace LeetCode
         }
         public static void Another()
         {
-
+            Another1();
+             
+                
         }
     }
 
