@@ -431,11 +431,67 @@ LeetCodeClass.StoneWall(arr );
 
 
 
-LeetCodeClass.DominatorArray(new int[]  { 3, 4, 3, 2, 3, -1, 3, 3 });
+//LeetCodeClass.DominatorArray(new int[]  { 3, 4, 3, 2, 3, -1, 3, 3 });
+//LeetCodeClass.CoinHeadTailChange();
 
 
 
-Console.ReadKey();
+
+//Take 2 row for each ART 
+  Example0000().GroupBy(art => art.Type).
+    SelectMany(e => e.OrderByDescending(p => p.Price).Take(2)).ToList() 
+    .ForEach(c => Console.WriteLine( $"{c.Name} "));
+Console.WriteLine("------------");
+//Take 1 row for each ART 
+Example0000().GroupBy(art => art.Type).
+  Select(e => e.OrderByDescending(p => p.Price).FirstOrDefault()).ToList()
+  .ForEach(c => Console.WriteLine($"{c.Name} "));
+/*
+ Select(g =>
+ new { Type = g.Key,
+ Name = g.Where( a => a.Price == g.Max(p => p.Price )).Select(a  =>a.Name).FirstOrDefault(),
+       Price = Math.Round( Convert.ToDecimal( g.Max( p=> p.Price) ) )
+ }
+ ).ToList();
+*/
+
+Console.ReadLine();
+
+
+
+  static List<Art> Example0000()
+{
+    List<Art> art = new List<Art>();
+    art.Add(new Art() { Price = 45, Type = "painting", Name = "Still Life in Maryland" });
+    art.Add(new Art() { Price = 123, Type = "sculpture", Name = "Dying Sheep" });
+    art.Add(new Art() { Price = 12, Type = "icon", Name = "Perplexed Smiley" });
+    art.Add(new Art() { Price = 460, Type = "sculpture", Name = "Waves on Sand" });
+    art.Add(new Art() { Price = 2030, Type = "painting", Name = "Robert in the Morning" });
+    art.Add(new Art() { Price = 10, Type = "icon", Name = "Smiley Picking Nose" });
+    art.Add(new Art() { Price = 700, Type = "painting", Name = "Birds in Autumn" });
+    art.Add(new Art() { Price = 1400, Type = "sculpture", Name = "Holding Hands" });
+    art.Add(new Art() { Price = 46, Type = "painting", Name = "Reeling Him In" });
+    art.Add(new Art() { Price = 12000, Type = "sculpture", Name = "Old Dog" });
+    art.Add(new Art() { Price = 6, Type = "icon", Name = "Hiding Smiley" });
+    art.Add(new Art() { Price = 810, Type = "sculpture", Name = "Rhinestone Cowgirl" });
+    art.Add(new Art() { Price = 250, Type = "painting", Name = "Upstairs, Downstairs" });
+    art.Add(new Art() { Price = 3, Type = "icon", Name = "Dopey Smiley" });
+    art.Add(new Art() { Price = 1000, Type = "painting", Name = "Young Love" });
+    art.Add(new Art() { Price = 260, Type = "sculpture", Name = "Taking a Spill" });
+    return art;
+}
+
+
+
+  class Art
+{
+    public string Type { get; set; }
+    public string Name { get; set; }
+    public int Price { get; set; }
+}
+
+/*
+ 
 void Print(int[] arr)
 {
     foreach( var item in arr)
@@ -446,3 +502,4 @@ void Print(int[] arr)
     Console.ReadKey();
 }
 
+*/

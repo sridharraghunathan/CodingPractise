@@ -1685,11 +1685,11 @@ P = 1, difference = | 3 − 10 | = 7 P = 2, difference = | 4 − 9 | = 5 P = 3, 
             inputString = inputString.ToLower();
             var stringCount = inputString.Count();
             var dict = new Dictionary<char, int>(){
-        {'a',1},
-        {'c',2},
-        {'g',3},
-        {'t',4}
-      };
+                {'a',1},
+                {'c',2},
+                {'g',3},
+                {'t',4}
+              }; 
 
             var result = new List<int>();
             for (int i = 0; i < stringCount; i++)
@@ -1943,6 +1943,28 @@ P = 1, difference = | 3 − 10 | = 7 P = 2, difference = | 4 − 9 | = 5 P = 3, 
                 }
             }
             return blocks;
+        }
+
+
+        public static int CoinHeadTailChange()
+        {
+
+            int[] sequence = { 0, 1, 0, 1, 0 };
+            int changesWithLeading0 = 0;
+            int changesWithLeading1 = 0;
+            for (int i = 0; i < sequence.Length; i++)
+            {
+                if (sequence[i] == 1 - (i % 2))//even number index 1 odd number index 0
+                {
+                    changesWithLeading0++;
+                }
+                if (sequence[i] == i % 2) //value == 
+                {
+                    changesWithLeading1++;
+                }
+            }
+            return Math.Min(changesWithLeading0, changesWithLeading1);
+
         }
     }
 }
