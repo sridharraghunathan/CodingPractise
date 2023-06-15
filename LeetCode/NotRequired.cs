@@ -25,8 +25,7 @@ namespace LeetCode
         public static void Another()
         {
             Another1();
-             
-                
+           
         }
     }
 
