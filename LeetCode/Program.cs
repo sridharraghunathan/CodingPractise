@@ -427,7 +427,7 @@ var slice1 = array[0..4]; /// index ,length
 Print(slice1);
 int[] arr = new int[] { 8,8,5,7, 9, 8, 7, 4, 8 };
 LeetCodeClass.StoneWall(arr );
- */
+ 
 
 
 
@@ -452,7 +452,6 @@ Example0000().GroupBy(art => art.Type).
        Price = Math.Round( Convert.ToDecimal( g.Max( p=> p.Price) ) )
  }
  ).ToList();
-*/
 
 
 
@@ -512,7 +511,34 @@ Console.ReadLine();
     public string Name { get; set; }
     public int Price { get; set; }
 }
+*/
 
+
+
+
+int[] arr = new int[8];
+for (int i = 0; i < arr.Length; i++)
+{
+    arr[i] = i + 1;
+}
+
+arr.RemoveAt(3);
+Console.WriteLine();
+
+/*
+
+int index = 0;
+while (arr.Length > 1)
+{
+    index = (index + 3) % arr.Length;
+    int[] temp = new int[arr.Length - 1];
+    Array.Copy(arr, temp, index);
+    Array.Copy(arr, index + 1, temp, index, arr.Length - index - 1);
+    arr = temp;
+}
+
+Console.WriteLine("The last remaining number is " + arr[0]);
+    
 /*
  
 void Print(int[] arr)
