@@ -522,9 +522,38 @@ for (int i = 0; i < arr.Length; i++)
     arr[i] = i + 1;
 }
 
-arr.RemoveAt(3);
-Console.WriteLine();
+int[] arr1 = new int[] { 2, 3, 4, 1, 3, 5, 6, 7, 6, 2 };
+while ( arr1.Length != 1)
+{
+    arr1 = RemoveElementInArray(arr1, arr1.Length - 1);
+    Print(arr1);
+    Console.WriteLine("END");
+}
 
+
+// since there is no method to remove value from array 
+int[] RemoveElementInArray(int[] arr, int index){
+    var newList = arr1.ToList();
+    newList.RemoveAt(index);
+    return newList.ToArray();
+}
+ 
+//List<int> nums = new List<int>() {  2, 3, 4, 1, 3, 5, 6 ,7,6,2 };
+
+var arr2 = arr1.ToList().GroupBy(e => e).OrderByDescending(g => g.Count()).ThenByDescending(g => g.Key).Take(2).Select(grp => grp.Key).ToArray();
+
+Print(arr2);
+
+void Print(int[] arr)
+{
+    foreach (var item in arr)
+    {
+        Console.WriteLine(item);
+        
+
+    }
+    Console.ReadKey();
+}
 /*
 
 int index = 0;
@@ -541,14 +570,6 @@ Console.WriteLine("The last remaining number is " + arr[0]);
     
 /*
  
-void Print(int[] arr)
-{
-    foreach( var item in arr)
-    {
-        Console.WriteLine(item);
-      
-    }
-    Console.ReadKey();
-}
+
 
 */
