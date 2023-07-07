@@ -43,6 +43,39 @@ namespace Testing
         LLD
     }
 
+
+
+    public class Test
+    {
+        private   readonly string str;
+
+        public Test()
+        {
+            str = "Hello";
+            Console.WriteLine(str);
+
+        }
+
+        public Test(string newStr)
+        {
+            str = newStr + " - The Changed Value";
+            Console.WriteLine(str);
+        }
+
+
+
+
+
+        public static void Main()
+        {
+            Test te = new Test();
+
+            Test new_te = new Test("Hi");
+        }
+
+
+    }
+
     public class CourseFactory
     {
         public static Course getCourses(Courses Course)
@@ -63,7 +96,7 @@ namespace Testing
 
     internal class Program : Modifier
     {
-        static void Main(string[] args)
+        static void Main9(string[] args)
         {
 
             //Parallel.Invoke(() => Parallel0(), () => Parallel1());

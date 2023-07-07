@@ -511,7 +511,6 @@ Console.ReadLine();
     public string Name { get; set; }
     public int Price { get; set; }
 }
-*/
 
 
 
@@ -530,19 +529,87 @@ while ( arr1.Length != 1)
     Console.WriteLine("END");
 }
 
+List<int> tests = new List<int>();
+int i = 0;
+for (; i < 10; i)
+{
+    tests.Add(i);
+}
 
+foreach (var test in tests)
+{
+    Console.Writeline(test);
+}
+ 
+
+
+List<Test> tests = new List<Test>();
+int i = 0;
+for (; i < 10; i)
+{
+    tests.Add(delegate { Console.WriteLine(i); });
+}
+
+foreach (var test in tests)
+{
+    test();
+}
+delegate void Test();
+
+
+*/
+
+var dateTime = DateTime.Now.AddDays(-90);
+
+
+List<int> tests = new List<int>();
+int i = 0;
+for (; i < 10; i++)
+{
+    tests.Add(i);
+}
+
+foreach (var test in tests)
+{
+    //Console.WriteLine(test);
+
+}
+
+
+ 
+List<sam> sams = new List<sam>() {
+    new sam(1, DateTime.Now) ,
+ new sam(2, DateTime.Now.AddDays(-91))
+ };
+
+
+sams.Where (t=> t.date < dateTime).Select(obj => new { Id = obj.Id } ).ToList().
+    
+    ForEach(sam =>Console.WriteLine(sam.Id));
+Console.WriteLine(dateTime.ToString("dd-MM-yyyy"));
+
+int[] arr1 = new int[] { 5, 9, 1, 2, 3, 7, 5, 6, 7, 3, 7, 6, 8, 5, 4, 9, 6, 2 };
+arr1.GroupBy( x=> x).Select( x => new { Times =  x.Key, CountTime = x.Count() }  ).ToList()
+    .ForEach(t => Console.WriteLine($"Times {t.Times } and Count {t.CountTime}"));
+
+
+public record sam(int Id, DateTime date)
+{
+
+}
+ /*
 // since there is no method to remove value from array 
 int[] RemoveElementInArray(int[] arr, int index){
-    var newList = arr1.ToList();
+    var newList = arr.ToList();
     newList.RemoveAt(index);
     return newList.ToArray();
 }
- 
+
 //List<int> nums = new List<int>() {  2, 3, 4, 1, 3, 5, 6 ,7,6,2 };
 
-var arr2 = arr1.ToList().GroupBy(e => e).OrderByDescending(g => g.Count()).ThenByDescending(g => g.Key).Take(2).Select(grp => grp.Key).ToArray();
+//var arr2 = arr1.ToList().GroupBy(e => e).OrderByDescending(g => g.Count()).ThenByDescending(g => g.Key).Take(2).Select(grp => grp.Key).ToArray();
 
-Print(arr2);
+//Print(arr2);
 
 void Print(int[] arr)
 {
@@ -554,6 +621,7 @@ void Print(int[] arr)
     }
     Console.ReadKey();
 }
+ */
 /*
 
 int index = 0;
